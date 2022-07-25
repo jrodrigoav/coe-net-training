@@ -11,12 +11,12 @@ import { IAlbum } from '../interfaces/ialbum';
   providedIn: 'root'
 })
 export class TypicodeService {
-  baseUrl: string;
+  private baseUrl: string;
   constructor(@Inject(ENV_CONFIG) private config: IEnvironmentConfig, private http: HttpClient) {
     this.baseUrl = config.typicodeUrl.replace(/\/+$/, '');
   }
 
-  resourceUrl(resource: string) {
+  private resourceUrl(resource: string) {
     return `${this.baseUrl}/${resource}`;
   }
 

@@ -18,6 +18,8 @@ import { AlbumsComponent } from './pages/albums/albums.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { UsersComponent } from './pages/users/users.component';
+import { UnicornRewardsApiService } from './services/unicorn-rewards-api.service';
+import { TestUnicornApiComponent } from './pages/test-unicorn-api/test-unicorn-api.component';
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1; // Remove this line to use Angular Universal
 
@@ -27,12 +29,7 @@ export function loggerCallback(logLevel: LogLevel, message: string) {
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
-    auth: {
-      clientId: "07eea724-3d99-4d9e-8cf2-c6b853c15e06",
-        authority: "https://login.microsoftonline.com/eedd1340-df1a-4db2-8a03-b4cfb1fa3e9d",
-        redirectUri: '/',
-        postLogoutRedirectUri: '/'
-    },
+    auth: environment.msalAuth,
     cache: {
       cacheLocation: BrowserCacheLocation.LocalStorage,
       storeAuthStateInCookie: isIE, // set to true for IE 11. Remove this line to use Angular Universal
@@ -51,6 +48,7 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
   // protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read']); // Prod environment. Uncomment to use.
   protectedResourceMap.set('https://graph.microsoft-ppe.com/v1.0/me', ['user.read']);
+  protectedResourceMap.set('/api/test/auth', ['api://07eea724-3d99-4d9e-8cf2-c6b853c15e06/access_as_user']);
 
   return {
     interactionType: InteractionType.Redirect,
@@ -74,7 +72,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AlbumsComponent,
     HomeComponent,
     NavigationComponent,
-    UsersComponent
+    UsersComponent,
+    TestUnicornApiComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +81,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AppRoutingModule,
     MsalModule
   ],
-  providers: [TypicodeService, { provide: ENV_CONFIG, useValue: environment },
+  providers: [TypicodeService, UnicornRewardsApiService, { provide: ENV_CONFIG, useValue: environment },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
