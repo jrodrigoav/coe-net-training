@@ -1,0 +1,45 @@
+<div class="container-lists">
+    <mat-card>
+        <mat-card-subtitle>User Lists</mat-card-subtitle>
+        <mat-card-content>
+            <ul>
+                <li *ngFor="let user of listUsers">
+                  <mat-checkbox 
+                    [(ngModel)]="user.checked"
+                    value="{{ user.id }}">
+                    {{user.name}}
+                  </mat-checkbox>
+                </li>
+              </ul>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-subtitle>Opciones</mat-card-subtitle>
+        <mat-card-content>
+            <button mat-button (click)="moveAllRightList()">>></button>
+        </mat-card-content>
+        <mat-card-content>
+            <button mat-button (click)="moveRightList()">></button>
+        </mat-card-content>
+        <mat-card-content>
+            <button mat-button (click)="moveLeftList()"><</button>
+        </mat-card-content>
+        <mat-card-content>
+            <button mat-button (click)="moveAllLeftList()"><<</button>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-subtitle>Lista de Usuarios Seleccionados</mat-card-subtitle>
+        <mat-card-content>
+            <ul>
+                <li *ngFor="let user of listSelectedUsers">
+                  <mat-checkbox 
+                  [(ngModel)]="user.checked"
+                  value="{{ user.id }}">
+                    {{user.name}}
+                  </mat-checkbox>
+                </li>
+              </ul>
+        </mat-card-content>
+    </mat-card>
+</div>
