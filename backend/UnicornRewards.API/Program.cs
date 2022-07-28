@@ -1,5 +1,7 @@
 using Microsoft.Identity.Web;
 using Serilog;
+using UnicornRewards.API.Services;
+
 const string AllowLocalhostCORSPolicy = "AllowLocalhostCORSPolicy";
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((hostContext, services, configuration) =>
@@ -17,8 +19,11 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration, "AzureAd");
 builder.Services.AddControllers();
+builder.Services.AddScoped<IContactService<string>, ContactService>();
+builder.Services.AddCors();
 var app = builder.Build();
 app.UseSerilogRequestLogging();
+app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors(AllowLocalhostCORSPolicy);

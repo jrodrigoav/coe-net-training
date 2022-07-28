@@ -1,0 +1,7 @@
+.container-lists{
+    display: inline-flex;
+}
+
+.container-lists button{
+    width: 60px;
+}
