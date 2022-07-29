@@ -1,45 +1,42 @@
 <div class="container-lists">
-    <mat-card>
-        <mat-card-subtitle>User Lists</mat-card-subtitle>
-        <mat-card-content>
-            <ul>
-                <li *ngFor="let user of listUsers">
-                  <mat-checkbox 
-                    [(ngModel)]="user.checked"
-                    value="{{ user.id }}">
-                    {{user.name}}
-                  </mat-checkbox>
-                </li>
-              </ul>
-        </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-subtitle>Opciones</mat-card-subtitle>
-        <mat-card-content>
-            <button mat-button (click)="moveAllRightList()">>></button>
-        </mat-card-content>
-        <mat-card-content>
-            <button mat-button (click)="moveRightList()">></button>
-        </mat-card-content>
-        <mat-card-content>
-            <button mat-button (click)="moveLeftList()"><</button>
-        </mat-card-content>
-        <mat-card-content>
-            <button mat-button (click)="moveAllLeftList()"><<</button>
-        </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-subtitle>Lista de Usuarios Seleccionados</mat-card-subtitle>
-        <mat-card-content>
-            <ul>
-                <li *ngFor="let user of listSelectedUsers">
-                  <mat-checkbox 
-                  [(ngModel)]="user.checked"
-                  value="{{ user.id }}">
-                    {{user.name}}
-                  </mat-checkbox>
-                </li>
-              </ul>
-        </mat-card-content>
-    </mat-card>
+  <div class="list-column">
+    <div>
+      <p>User Lists</p>
+    </div>
+    <div>
+      <ul>
+        <li *ngFor="let user of listUsers">
+          <input type="checkbox" 
+          [(ngModel)]="user.checked"
+          value="{{ user.id }}">
+          {{user.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="list-column">
+    <div>
+      <p>Opciones</p>
+    </div>
+    <div><button type="button" (click)="moveAllRightList()">>></button></div>
+    <div><button type="button" (click)="moveRightList()">></button></div>
+    <div><button type="button" (click)="moveLeftList()"><</button></div>
+    <div><button type="button" (click)="moveAllLeftList()"><<</button></div>
+  </div>
+  <div class="list-column">
+    <div>
+      <p>Lista de Usuarios Seleccionados</p>
+    </div>
+    <div>
+      <ul>
+        <li *ngFor="let user of listSelectedUsers">
+          <input type="checkbox"
+          [(ngModel)]="user.checked"
+            value="{{ user.id }}">
+              {{user.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

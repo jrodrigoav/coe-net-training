@@ -2,6 +2,6 @@
 {
     public interface IContactService<T>
     {
-        Task<T> AddContact(T id);
+        Task<T> AddContactAsync(T id);
     }
 }

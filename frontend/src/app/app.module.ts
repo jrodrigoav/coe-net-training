@@ -2,8 +2,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {MatCardModule} from '@angular/material/card';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 
 // MSAL
 import { MsalModule, MsalService, MsalGuard, MsalInterceptor, MsalBroadcastService, MsalRedirectComponent, MsalInterceptorConfiguration, MsalGuardConfiguration, MSAL_INSTANCE, MSAL_GUARD_CONFIG, MSAL_INTERCEPTOR_CONFIG } from "@azure/msal-angular";
@@ -85,8 +83,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HttpClientModule,
     AppRoutingModule,
     MsalModule,
-    MatCardModule,
-    MatCheckboxModule,
     FormsModule
   ],
   providers: [TypicodeService, UnicornRewardsApiService, { provide: ENV_CONFIG, useValue: environment },

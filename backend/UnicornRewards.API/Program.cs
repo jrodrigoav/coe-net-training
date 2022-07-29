@@ -15,6 +15,7 @@ builder.Services.AddCors(options =>
                       {
                           policy.WithHeaders("Authorization", "Accept", "Referer", "User-Agent");
                           policy.WithOrigins("http://localhost:4200");
+                          policy.WithMethods("GET", "PUT");
                       });
 });
 builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration, "AzureAd");
@@ -23,7 +24,6 @@ builder.Services.AddScoped<IContactService<string>, ContactService>();
 builder.Services.AddCors();
 var app = builder.Build();
 app.UseSerilogRequestLogging();
-app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors(AllowLocalhostCORSPolicy);
