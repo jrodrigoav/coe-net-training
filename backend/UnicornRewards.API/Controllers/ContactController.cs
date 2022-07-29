@@ -5,7 +5,7 @@ using UnicornRewards.API.Services;
 
 namespace UnicornRewards.API.Controllers
 {
-    [ApiController, Route("api/contact"), AllowAnonymous]
+    [ApiController, Route("api/contact")]
     public class ContactController : ControllerBase
     {
         private readonly IContactService<string> _contactService;
@@ -18,15 +18,15 @@ namespace UnicornRewards.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            var response = await _contactService.AddContact(id.ToString());
+            var response = await _contactService.AddContactAsync(id.ToString());
             return Ok(response);
         }
 
         [HttpPut("{name}")]
         public async Task<IActionResult> Put(string name)
         {
-            var response = await _contactService.AddContact(name);
-            return Accepted(response);
+            var response = await _contactService.AddContactAsync(name);
+            return Accepted();
         }
     }
 }
