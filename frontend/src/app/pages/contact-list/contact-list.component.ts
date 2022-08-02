@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { IUser } from 'src/app/interfaces/iuser';
 import { TypicodeService } from 'src/app/services/typicode.service';
 import { UnicornRewardsApiService } from 'src/app/services/unicorn-rewards-api.service';
@@ -9,14 +10,14 @@ import { UnicornRewardsApiService } from 'src/app/services/unicorn-rewards-api.s
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
-  private selectedUsersFile:string = "./selected_users.json";
+  
   listUsers: IUser[] = [];
   listSelectedUsers: IUser[] = [];
   constructor(private typicodeService: TypicodeService, private _unicornRewardService: UnicornRewardsApiService) { }
 
   ngOnInit(): void {
 
-    this.typicodeService.getAllUsers().subscribe(
+    this.loadUsersFromService().subscribe(
       r => this.listUsers = r,
       error => { console.log(error) },
       () => {
@@ -27,6 +28,9 @@ export class ContactListComponent implements OnInit {
     
   }
 
+  loadUsersFromService(): Observable<IUser[]> {
+    return this.typicodeService.getAllUsers();
+  }
 
   load_localstorage() {
 
@@ -121,11 +125,11 @@ export class ContactListComponent implements OnInit {
   }
 
   existOnSelectedUsers(name: string) {
-    return  (this.listSelectedUsers.filter(item => item.name == name)[0]);
+    return  (this.listSelectedUsers.filter(item => item.name == name)[0]) ? true : false;
   }
 
-  existOnListUsers(name: string) {
-    return (this.listUsers.filter(item => item.name == name)[0]);
+  existOnListUsers(name: string): boolean {
+    return (this.listUsers.filter(item => item.name == name)[0]) ? true : false;
   }
 
 }
