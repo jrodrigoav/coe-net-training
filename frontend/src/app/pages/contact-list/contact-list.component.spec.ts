@@ -46,9 +46,7 @@ describe('ContactListComponent', () => {
       r => component.listUsers = r,
       error => { console.log(error) },
       () => {
-        if (localStorage.getItem("UserListSelected") === null) component.saveSelectedUsers(component.listUsers.slice(0, 2));
-        component.load_localstorage();
-
+      
         let users: IUser[] = [];
         users = component.loadSelectedUsers("UserListSelected");
         expect(users.length).toBeGreaterThan(1);
