@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
+using System.Text.Json;
 using UnicornRewards.API.Services;
 
 namespace UnicornRewards.API.Controllers
@@ -8,9 +10,9 @@ namespace UnicornRewards.API.Controllers
     [ApiController, Route("api/contact")]
     public class ContactController : ControllerBase
     {
-        private readonly IContactService<string> _contactService;
+        private readonly IContactService _contactService;
 
-        public ContactController(IContactService<string> contactService)
+        public ContactController(IContactService contactService)
         {
             this._contactService = contactService;
         }
@@ -27,6 +29,23 @@ namespace UnicornRewards.API.Controllers
         {
             var response = await _contactService.AddContactAsync(name);
             return Accepted();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> getScvContent(IFormCollection collection)
+        {
+            var file = collection.Files["file"];
+            var data = new List<string>();
+            using (var reader = new StreamReader(file.OpenReadStream()))
+            {
+                while (reader.EndOfStream == false)
+                {
+                    data.Add(reader.ReadLine() ?? string.Empty);
+                }
+            }
+
+            var response = await _contactService.ReadCsvAsync(data);
+            return Accepted(response);
         }
     }
 }

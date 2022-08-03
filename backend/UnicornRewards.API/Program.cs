@@ -15,13 +15,16 @@ builder.Services.AddCors(options =>
                       {
                           policy.WithHeaders("Authorization", "Accept", "Referer", "User-Agent");
                           policy.WithOrigins("http://localhost:4200");
-                          policy.WithMethods("GET", "PUT");
+                          policy.WithMethods("GET", "PUT", "POST");
                       });
 });
 builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration, "AzureAd");
 builder.Services.AddControllers();
-builder.Services.AddScoped<IContactService<string>, ContactService>();
 builder.Services.AddCors();
+
+builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddSingleton<UserValidatorService>();
+
 var app = builder.Build();
 app.UseSerilogRequestLogging();
 app.UseAuthentication();

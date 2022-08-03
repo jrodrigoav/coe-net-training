@@ -40,3 +40,31 @@
     </div>
   </div>
 </div>
+<br>
+<div class="container-lists">
+  <div class="list-column">
+    <input type="file" class="upload" (change)="changeListener($event)">
+    <br>
+    <div><button (click)="sendScv()">Send</button></div>
+  </div>
+
+  <!-- <div class="list-column">
+    <p>Total Rows: {{ svcResult.total_rows_parsed }}</p>
+    <p>Valid Rows: {{ svcResult.valid_rows }}</p>
+    <p>Invalid Rows: {{ svcResult.invalid_rows }}</p>
+
+    <div *ngFor="let error of svcResult.errors">
+      <ul>
+        <li>
+          Line: {{ error.line_number }}
+        </li>
+        <li>
+          Error: {{ error.validation_error }}
+        </li>
+      </ul>
+    </div>
+  </div> -->
+
+      <!-- {{ svcResult | json }} -->
+</div>
+

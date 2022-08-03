@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ENV_CONFIG, IEnvironmentConfig } from '../interfaces/environment-config';
+import { IScvResponse } from '../interfaces/iscvResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,10 @@ export class UnicornRewardsApiService {
 
   putRegister(name: string): Observable<any> {
     return this.http.put<any>(this.resourceUrl(`api/contact/${name}`), name);
-}
+  }
+
+  readScv(fileByteArray: FormData): Observable<IScvResponse> {
+    //return this.http.post<IScvResponse>(this.resourceUrl(`api/contact?file=${fileByteArray}`), fileByteArray);
+    return this.http.post<IScvResponse>(this.resourceUrl('api/contact'), fileByteArray);
+  }
 }

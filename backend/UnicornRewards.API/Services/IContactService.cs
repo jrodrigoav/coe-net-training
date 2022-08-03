@@ -1,7 +1,11 @@
-﻿namespace UnicornRewards.API.Services
+﻿using FluentValidation.Results;
+using UnicornRewards.API.Models.Response;
+
+namespace UnicornRewards.API.Services
 {
-    public interface IContactService<T>
+    public interface IContactService
     {
-        Task<T> AddContactAsync(T id);
+        Task<string> AddContactAsync(string id);
+        Task<ReadCsvResponse> ReadCsvAsync(List<string> data);
     }
 }
