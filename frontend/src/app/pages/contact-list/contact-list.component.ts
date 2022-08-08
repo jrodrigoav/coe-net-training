@@ -13,7 +13,6 @@ import { UnicornRewardsApiService } from 'src/app/services/unicorn-rewards-api.s
 export class ContactListComponent implements OnInit {
   listUsers: IUser[] = [];
   listSelectedUsers: IUser[] = [];
-  svcResult!: IScvResponse;
   constructor(private typicodeService: TypicodeService, private _unicornRewardService: UnicornRewardsApiService) { }
 
   ngOnInit(): void {
@@ -97,44 +96,6 @@ export class ContactListComponent implements OnInit {
     }
     this.listSelectedUsers.splice(0, this.listSelectedUsers.length);
     this.listUsers = listauxusu;
-  }
-
-  file!: File;
-
-  changeListener(files : any) {
-    let fileList = (<HTMLInputElement>files.target).files;
-    console.log(fileList?.length);
-    if (fileList && fileList.length > 0) {
-      this.file = fileList[0];
-      console.log(this.file.name);
-      console.log(this.file.size);
-      console.log(this.file.type);
-      if((this.file.size / 1024) > 10240)
-      {
-        alert('The selected file is greater than 10 MB');
-        return;      
-      }
-      // else
-      // {
-      //   let formData = new FormData();
-      //   formData.append('file', this.file);
-      //   this.sendScv(formData);
-      // }
-    }
-  }
-
-  // sendScv(file : FormData){
-    sendScv(){
-    let formData = new FormData();
-    formData.append('file', this.file);
-
-    const readScv$ = this._unicornRewardService.readScv(formData);
-    readScv$.subscribe(
-			(response) => {
-        this.svcResult = response;
-        console.log(JSON.stringify(this.svcResult));
-        //this.svcResult.errors.splice(this.svcResult.invalid_rows, this.svcResult.total_rows_parsed - this.svcResult.invalid_rows);
-    });
   }
 }
 

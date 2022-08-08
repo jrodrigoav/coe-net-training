@@ -9,12 +9,26 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginFailedComponent } from './pages/login-failed/login-failed.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { TestUnicornApiComponent } from './pages/test-unicorn-api/test-unicorn-api.component';
+import { FileImportComponent } from './pages/users/file-import/file-import.component';
+import { UserCreateComponent } from './pages/users/user-create/user-create.component';
+import { UserUpdateComponent } from './pages/users/user-update/user-update.component';
+import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, },
+  { path: 'home', component: HomeComponent },
   { path: 'login-failed', component: LoginFailedComponent },
   { path: 'users', component: UsersComponent, canActivate: [MsalGuard] },
+  { path: 'users-list', component: UsersListComponent, canActivate: [MsalGuard] },
+  { path: 'file-import', component: FileImportComponent, canActivate: [MsalGuard] },
+  { path: 'user-create', component: UserCreateComponent, canActivate: [MsalGuard] },
+  { 
+    path: 'user-update', 
+    children: [
+      { path: '', component: UserUpdateComponent, canActivate: [MsalGuard] },
+      { path: ':id', component: UserUpdateComponent, canActivate: [MsalGuard] }
+    ] 
+  },
   { path: 'albums', component: AlbumsComponent, canActivate: [MsalGuard] },
   { path: 'contact', component: ContactListComponent, canActivate: [MsalGuard] },
   { path: 'test', component: TestUnicornApiComponent, canActivate: [MsalGuard] },

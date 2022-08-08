@@ -1,0 +1,50 @@
+<form (ngSubmit)="updateUser(form.value, form.valid)" #form="ngForm" novalidate autocomplete="off">
+    <!-- <app-user-form [selectedUser] = "selectedUser"></app-user-form> -->
+
+    <div class="form-container">
+        <!-- Detail {{ selectedUser | json }} -->
+        <div class="row justify-content-md-center p-2">
+            <div class="col-1"><label for="name">Name:</label></div>
+            <div class="col-6">
+                <input id="name" name="name" type="text" class="form-control" required maxlength="300" #name="ngModel"
+                    [(ngModel)]="this.selectedUser.name" ngModel />
+                <div class="error" *ngIf="name.errors?.['required'] && name.dirty">Name is required.</div>
+                <div class="error" *ngIf="name.errors?.['maxlength'] && name.dirty">Max length of Name is 300.</div>
+            </div>
+        </div>
+        <div class="row justify-content-md-center p-2">
+            <div class="col-1"><label for="username">User Name:</label></div>
+            <div class="col-6">
+                <input id="username" name="username" type="text" class="form-control" pattern="^[A-Za-z0-9_-]*$"
+                    required #userName="ngModel" [(ngModel)]="selectedUser.userName" ngModel />
+                <div class="error" *ngIf="userName.errors?.['required'] && userName.dirty">User Name is required.</div>
+                <div class="error" *ngIf="userName.errors?.['pattern'] && userName.dirty">User Name should not have
+                    special characters</div>
+            </div>
+        </div>
+        <div class="row justify-content-md-center p-2">
+            <div class="col-1"><label for="email">Email:</label></div>
+            <div class="col-6">
+                <input id="email" name="email" type="text" class="form-control" #email="ngModel" required email
+                    [(ngModel)]="selectedUser.email" ngModel />
+                <div class="error" *ngIf="email.errors?.['required'] && email.dirty">Email is required.</div>
+                <div class="error" *ngIf="email.errors?.['email'] && email.dirty">Not formatted email.</div>
+            </div>
+        </div>
+        <div class="row justify-content-md-center p-2">
+            <div class="col-1"><label for="webSite">WebSite:</label></div>
+            <div class="col-6">
+                <input id="webSite" name="webSite" type="text" class="form-control" #webSite="ngModel"
+                    [(ngModel)]="selectedUser.webSite" ngModel />
+            </div>
+        </div>
+    </div>
+
+    <div class="container bg-light">
+        <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Update</button>
+        </div>
+    </div>
+    <!-- Data {{ form.value | json }}
+    <div> Valid: {{ form.valid | json}}</div> -->
+</form>

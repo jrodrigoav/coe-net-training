@@ -1,0 +1,33 @@
+<form>
+    <div class="mb-3 row">
+      <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Full text search:</label>
+      <div class="col-xs-3 col-sm-auto">
+        <input id="searchedName" class="form-control" (change)="getUsers(searchedName)" type="text" name="searchedName" [(ngModel)]="searchedName">
+      </div>
+    </div>
+    <!-- <p>{{ userResponse | json }}</p> -->
+  </form>
+
+  <!-- <table class="table table-striped" *ngIf="userResponse.responseResult.length > 0"> -->
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">UserName</th>
+      <th scope="col">Email</th>
+      <th scope="col">WebSite</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of userList">
+      <td><ngb-highlight [result]="user.id" [term]="searchedName"></ngb-highlight></td>
+      <td><ngb-highlight [result]="user.name" [term]="searchedName"></ngb-highlight></td>
+      <td><ngb-highlight [result]="user.userName" [term]="searchedName"></ngb-highlight></td>
+      <td><ngb-highlight [result]="user.email" [term]="searchedName"></ngb-highlight></td>
+      <td><ngb-highlight [result]="user.webSite" [term]="searchedName"></ngb-highlight></td>
+      <td><button class="btn btn-success" routerLink="/user-update/{{ user.id }}">Update</button></td>
+    </tr>
+    </tbody>
+  </table>

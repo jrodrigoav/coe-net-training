@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using UnicornRewards.API.Models.Response;
+using UnicornRewards.API.Models.Entities;
 
 namespace UnicornRewards.API.Services
 {
