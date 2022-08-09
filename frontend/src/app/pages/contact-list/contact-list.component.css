@@ -1,0 +1,12 @@
+.container-lists{
+    display: inline-flex;
+}
+
+.container-lists .list-column{
+    border: solid 1px #000;
+    padding: 10px;
+}
+
+.container-lists button{
+    width: 60px;
+}

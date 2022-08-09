@@ -20,4 +20,8 @@ export class UnicornRewardsApiService {
     const msg= encodeURIComponent(message ?? "Hello World");
     return this.http.get(this.resourceUrl(`api/test/auth/${msg}`));
   }
+
+  putRegister(name: string): Observable<any> {
+    return this.http.put<any>(this.resourceUrl(`api/contact/${name}`), name);
+}
 }
