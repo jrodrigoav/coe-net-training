@@ -12,7 +12,7 @@ export class UsersComponent implements OnInit {
   constructor(private typicodeService: TypicodeService) { }
 
   ngOnInit(): void {
-    this.typicodeService.getAllUsers().subscribe(r => this.users = r);
+    this.typicodeService.getAllUsers().subscribe((r: IUser[]) => this.users = r);
   }
 
 }
