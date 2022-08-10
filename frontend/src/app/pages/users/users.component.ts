@@ -8,11 +8,16 @@ import { TypicodeService } from '../../services/typicode.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  users:IUser[]=[];
-  constructor(private typicodeService: TypicodeService) { }
-
-  ngOnInit(): void {
-    this.typicodeService.getAllUsers().subscribe((r: IUser[]) => this.users = r);
+  users: IUser[];
+  constructor(private typicodeService: TypicodeService) {
+    this.users = [];
   }
 
+  ngOnInit(): void {
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.typicodeService.getAllUsers().subscribe((r: IUser[]) => this.users = r);
+  }
 }
