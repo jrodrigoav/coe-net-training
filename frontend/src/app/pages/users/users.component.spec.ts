@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientModule } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { ENV_CONFIG } from '../../interfaces/environment-config';
+import { TypicodeService } from '../../services/typicode.service';
 import { UsersComponent } from './users.component';
 
 describe('UsersComponent', () => {
@@ -8,7 +11,9 @@ describe('UsersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UsersComponent ]
+      declarations: [ UsersComponent ],
+      imports: [HttpClientModule],
+      providers: [TypicodeService, { provide: ENV_CONFIG, useValue: environment }]
     })
     .compileComponents();
 

@@ -12,6 +12,6 @@ export class AlbumsComponent implements OnInit {
   constructor(private typicodeService:TypicodeService) { }
 
   ngOnInit(): void {
-    this.typicodeService.getAllAlbums().subscribe(r => this.albums = r);
+    this.typicodeService.getAllAlbums().subscribe((r: IAlbum[]) => this.albums = r);
   }
 }
