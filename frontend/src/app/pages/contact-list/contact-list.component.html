@@ -1,0 +1,42 @@
+<div class="container-lists">
+  <div class="list-column">
+    <div>
+      <p>User Lists</p>
+    </div>
+    <div>
+      <ul>
+        <li *ngFor="let user of listUsers">
+          <input type="checkbox" 
+          [(ngModel)]="user.checked"
+          value="{{ user.id }}">
+          {{user.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="list-column">
+    <div>
+      <p>Opciones</p>
+    </div>
+    <div><button type="button" (click)="moveAllRightList()">>></button></div>
+    <div><button type="button" (click)="moveRightList()">></button></div>
+    <div><button type="button" (click)="moveLeftList()"><</button></div>
+    <div><button type="button" (click)="moveAllLeftList()"><<</button></div>
+  </div>
+  <div class="list-column">
+    <div>
+      <p>Lista de Usuarios Seleccionados</p>
+    </div>
+    <div>
+      <ul>
+        <li *ngFor="let user of listSelectedUsers">
+          <input type="checkbox"
+          [(ngModel)]="user.checked"
+            value="{{ user.id }}">
+              {{user.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.typicodeService.getAllUsers().subscribe(r => this.users = r);
+    this.getUsers();
   }
 
   getUsers() {
