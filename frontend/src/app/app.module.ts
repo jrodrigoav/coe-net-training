@@ -23,6 +23,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { UnicornRewardsApiService } from './services/unicorn-rewards-api.service';
 import { TestUnicornApiComponent } from './pages/test-unicorn-api/test-unicorn-api.component';
 import { ContactListComponent } from './pages/contact-list/contact-list.component';
+import { UsersEditComponent } from './pages/users/users-edit/users-edit.component';
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1; // Remove this line to use Angular Universal
 
@@ -77,14 +78,14 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     NavigationComponent,
     UsersComponent,
     TestUnicornApiComponent,
-    ContactListComponent
+    ContactListComponent,
     UsersEditComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [TypicodeService, UnicornRewardsApiService, { provide: ENV_CONFIG, useValue: environment },
