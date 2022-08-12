@@ -2,6 +2,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // MSAL
 import { MsalModule, MsalService, MsalGuard, MsalInterceptor, MsalBroadcastService, MsalRedirectComponent, MsalInterceptorConfiguration, MsalGuardConfiguration, MSAL_INSTANCE, MSAL_GUARD_CONFIG, MSAL_INTERCEPTOR_CONFIG } from "@azure/msal-angular";
@@ -20,11 +22,12 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { UsersComponent } from './pages/users/users.component';
 import { UnicornRewardsApiService } from './services/unicorn-rewards-api.service';
 import { TestUnicornApiComponent } from './pages/test-unicorn-api/test-unicorn-api.component';
+import { UsersEditComponent } from './pages/users/users-edit/users-edit.component';
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1; // Remove this line to use Angular Universal
 
 export function loggerCallback(logLevel: LogLevel, message: string) {
-  console.log(message);
+  // console.log(message);
 }
 
 export function MSALInstanceFactory(): IPublicClientApplication {
@@ -73,13 +76,16 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HomeComponent,
     NavigationComponent,
     UsersComponent,
-    TestUnicornApiComponent
+    TestUnicornApiComponent,
+    UsersEditComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    MsalModule
+    MsalModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [TypicodeService, UnicornRewardsApiService, { provide: ENV_CONFIG, useValue: environment },
     {
