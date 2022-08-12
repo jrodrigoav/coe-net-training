@@ -41,18 +41,16 @@ export class UsersEditComponent implements OnInit {
   }
   onSubmit(form: FormGroup) {
     if (form.valid) {
-        this.typicodeService.updateUser(form.value).pipe().subscribe(
-          res => {
-            alert("User updated successfully");
-            this.router.navigate(['/users']);
-            console.info(res);
-          },
-
-          err => {
-            alert("Error updating the user, sorry :(");
-            console.error(err);
-          }
-        );
+      this.typicodeService.updateUser(form.value).pipe().subscribe({
+        complete: () => {
+          alert("User updated successfully");
+          this.router.navigate(['/users']);
+        },
+        error: (e) => {
+          alert("Error updating the user, sorry :(");
+          console.error(e);
+        },
+      });
 
     }
     else {
