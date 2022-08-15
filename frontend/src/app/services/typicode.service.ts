@@ -28,7 +28,6 @@ export class TypicodeService {
   }
 
   updateUser(user: IUser): Observable<any> {
-    console.log("aaaa")
     return this.http.put('api/test/auth/users', user);
   }
 }
