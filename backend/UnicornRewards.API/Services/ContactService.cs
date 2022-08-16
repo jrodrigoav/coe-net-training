@@ -8,7 +8,6 @@
         {
             _userValidatorService = userValidatorService;
         }
-
         public async Task<string> AddContactAsync(string id)
         {
             return "Registro Creado: Registro: " + id;

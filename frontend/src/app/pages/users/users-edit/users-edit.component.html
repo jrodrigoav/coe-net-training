@@ -1,0 +1,64 @@
+<div class="container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" class="col from">
+        <div class="input-div">
+            <label>
+                Name:
+                <input type="text" class="form-control" name="name" formControlName="name" />
+            </label>
+            <div *ngIf="userForm.get('name')?.errors?.['required'] && (userForm.get('name')?.dirty || userForm.get('name')?.touched)"
+                class="error">
+                Please provide a name.
+            </div>
+            <div *ngIf="userForm.get('name')?.errors?.['minlength'] && userForm.get('name')?.touched" class="error">
+                Name must be at least 5 characters long.
+            </div>
+        </div>
+        <div class="input-div">
+            <label>
+                Username:
+                <input type="text" class="form-control" name="username" formControlName="username" />
+            </label>
+            <div *ngIf="userForm.get('username')?.errors?.['required'] && (userForm.get('username')?.dirty || userForm.get('username')?.touched)"
+                class="error">
+                Please provide a username.
+            </div>
+            <div *ngIf="userForm.get('username')?.errors?.['minlength'] && userForm.get('username')?.touched"
+                class="error">
+                Username must be at least 3 characters long.
+            </div>
+        </div>
+        <div class="input-div">
+            <label>
+                Email:
+                <input type="text" class="form-control" name="email" formControlName="email" />
+            </label>
+            <div *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)"
+                class="error">
+                Please provide a valid email address.
+            </div>
+        </div>
+        <div class="input-div">
+            <label>
+                Website:
+                <input type="text" class="form-control" name="website" formControlName="website" />
+            </label>
+            <div *ngIf="userForm.get('website')?.errors?.['required'] && (userForm.get('website')?.dirty || userForm.get('website')?.touched)"
+                class="error">
+                Please provide a website.
+            </div>
+            <div *ngIf="userForm.get('website')?.errors?.['pattern'] && userForm.get('website')?.touched"
+                class="error">
+                Incorrect website pattern.
+            </div>
+        </div>
+        <div class="input-div">
+            <label>
+                Checked:
+                <input type="checkbox" name="checked" formControlName="checked" >
+                
+            </label>
+        </div>
+        <a class="button btn-link" routerLink="/users">Cancel</a>
+        <button class="button" type="submit" [disabled]="userForm.invalid">Send</button>
+    </form>
+</div>

@@ -1,22 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnicornRewards.API", "UnicornRewards.API\UnicornRewards.API.csproj", "{C4B788F9-F6DA-4447-BA0F-3ACD24E0CE6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnicornRewards.API", "UnicornRewards.API\UnicornRewards.API.csproj", "{C4B788F9-F6DA-4447-BA0F-3ACD24E0CE6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnicornRewards.Test", "UnicornRewards.Test\UnicornRewards.Test.csproj", "{97FCA7B5-BA6B-4764-BFB8-A8BFE81FC92F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C4B788F9-F6DA-4447-BA0F-3ACD24E0CE6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4B788F9-F6DA-4447-BA0F-3ACD24E0CE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4B788F9-F6DA-4447-BA0F-3ACD24E0CE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4B788F9-F6DA-4447-BA0F-3ACD24E0CE6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97FCA7B5-BA6B-4764-BFB8-A8BFE81FC92F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97FCA7B5-BA6B-4764-BFB8-A8BFE81FC92F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97FCA7B5-BA6B-4764-BFB8-A8BFE81FC92F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97FCA7B5-BA6B-4764-BFB8-A8BFE81FC92F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {115E90FC-A619-4E62-B6AC-3267C72BEF74}
 	EndGlobalSection
 EndGlobal

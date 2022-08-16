@@ -19,6 +19,7 @@ import { UserCreateComponent } from './pages/users/user-create/user-create.compo
 import { UserUpdateComponent } from './pages/users/user-update/user-update.component';
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { UsersComponent } from './pages/users/users.component';
+import { UsersEditComponent } from './pages/users/users-edit/users-edit.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },

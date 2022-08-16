@@ -131,5 +131,4 @@ export class ContactListComponent implements OnInit {
   existOnListUsers(name: string): boolean {
     return (this.listUsers.filter(item => item.name == name)[0]) ? true : false;
   }
-
 }
