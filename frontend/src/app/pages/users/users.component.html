@@ -1,9 +1,25 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <ul *ngFor="let u of users">
-                <li>{{u.name}}</li>
-            </ul>
-        </div>
-    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Username</td>
+                <td>Email</td>
+                <td>Website</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let u of users">
+                <td>{{u.name}}</td>
+                <td>{{u.username}}</td>
+                <td>{{u.email}}</td>
+                <td>{{u.website}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" (click)="editUser(u)">Edit</button>
+                    <!-- <button class="btn btn-sm btn-danger">Delete</button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

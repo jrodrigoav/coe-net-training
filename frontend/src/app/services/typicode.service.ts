@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { IEnvironmentConfig, ENV_CONFIG } from '../interfaces/environment-config';
@@ -26,5 +25,9 @@ export class TypicodeService {
 
   getAllAlbums(): Observable<IAlbum[]> {
     return this.http.get<IAlbum[]>(this.resourceUrl('albums'));
+  }
+
+  updateUser(user: IUser): Observable<any> {
+    return this.http.put('api/test/auth/users', user);
   }
 }
