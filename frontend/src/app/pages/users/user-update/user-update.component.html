@@ -1,43 +1,26 @@
-<form (ngSubmit)="updateUser(form.value, form.valid)" #form="ngForm" novalidate autocomplete="off">
-    <!-- <app-user-form [selectedUser] = "selectedUser"></app-user-form> -->
-
-    <div class="form-container">
-        <!-- Detail {{ selectedUser | json }} -->
-        <div class="row justify-content-md-center p-2">
-            <div class="col-1"><label for="name">Name:</label></div>
-            <div class="col-6">
-                <input id="name" name="name" type="text" class="form-control" required maxlength="300" #name="ngModel"
-                    [(ngModel)]="this.selectedUser.name" ngModel />
-                <div class="error" *ngIf="name.errors?.['required'] && name.dirty">Name is required.</div>
-                <div class="error" *ngIf="name.errors?.['maxlength'] && name.dirty">Max length of Name is 300.</div>
-            </div>
-        </div>
-        <div class="row justify-content-md-center p-2">
-            <div class="col-1"><label for="username">User Name:</label></div>
-            <div class="col-6">
-                <input id="username" name="username" type="text" class="form-control" pattern="^[A-Za-z0-9_-]*$"
-                    required #userName="ngModel" [(ngModel)]="selectedUser.userName" ngModel />
-                <div class="error" *ngIf="userName.errors?.['required'] && userName.dirty">User Name is required.</div>
-                <div class="error" *ngIf="userName.errors?.['pattern'] && userName.dirty">User Name should not have
-                    special characters</div>
-            </div>
-        </div>
-        <div class="row justify-content-md-center p-2">
-            <div class="col-1"><label for="email">Email:</label></div>
-            <div class="col-6">
-                <input id="email" name="email" type="text" class="form-control" #email="ngModel" required email
-                    [(ngModel)]="selectedUser.email" ngModel />
-                <div class="error" *ngIf="email.errors?.['required'] && email.dirty">Email is required.</div>
-                <div class="error" *ngIf="email.errors?.['email'] && email.dirty">Not formatted email.</div>
-            </div>
-        </div>
-        <div class="row justify-content-md-center p-2">
-            <div class="col-1"><label for="webSite">WebSite:</label></div>
-            <div class="col-6">
-                <input id="webSite" name="webSite" type="text" class="form-control" #webSite="ngModel"
-                    [(ngModel)]="selectedUser.webSite" ngModel />
-            </div>
-        </div>
+<form (ngSubmit)="updateUser(form.value, form.valid)" [formGroup]="editUser" #form="ngForm">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" placeholder="Enter Name" formControlName="name">
+        <div class="error" *ngIf="editUser.get('name')?.hasError('required')">Name is required.</div>
+        <div class="error" *ngIf="editUser.get('name')?.hasError('maxlength')">Max length of Name is 300.</div>
+    </div>
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" placeholder="Enter Username" formControlName="userName">
+        <div class="error" *ngIf="editUser.get('userName')?.hasError('required')">Username is required.</div>
+        <div class="error" *ngIf="editUser.get('userName')?.hasError('customNoSpecialCharactersValidator')">User Name should not have special characters</div>
+        <div class="error" *ngIf="editUser.get('userName')?.hasError('customStartWithLetterValidator')">User Name should start with a letter</div>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" placeholder="Enter Email" formControlName="email">
+        <div class="error" *ngIf="editUser.get('email')?.hasError('required')">Email is required.</div>
+        <div class="error" *ngIf="editUser.get('email')?.hasError('email')">Not formatted email.</div>
+    </div>
+    <div class="form-group">
+        <label>Website</label>
+        <input type="text" class="form-control" placeholder="Enter WebSite" formControlName="webSite">
     </div>
 
     <div class="container bg-light">
@@ -45,6 +28,4 @@
             <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Update</button>
         </div>
     </div>
-    <!-- Data {{ form.value | json }}
-    <div> Valid: {{ form.valid | json}}</div> -->
 </form>

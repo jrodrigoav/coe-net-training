@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ENV_CONFIG, IEnvironmentConfig } from '../interfaces/environment-config';
+import { IQuestion, IQuestionsResponse } from '../interfaces/iquestions';
 import { IScvResponse } from '../interfaces/iscvResponse';
+import { Itab, ITabsResponse } from '../interfaces/itabs';
 import { IUser } from '../interfaces/iuser';
 import { IUserResponse } from '../interfaces/iuser-list';
 
@@ -47,5 +49,29 @@ export class UnicornRewardsApiService {
 
   getUserById(id: number): Observable<IUser> {
     return this.http.get<IUser>(this.resourceUrl('api/users/') + id);
+  }
+
+  getTabsList(): Observable<ITabsResponse> {
+    return this.http.get<ITabsResponse>(this.resourceUrl('api/tabs'))
+  }
+
+  deleteTab(id: number): Observable<boolean>{
+    return this.http.delete<boolean>(this.resourceUrl('api/tabs/') + id)
+  }
+
+  createTab(tabmodel: Itab): Observable<number>{
+    return this.http.post<number>(this.resourceUrl('api/tabs'), tabmodel);
+  }
+
+  getQuestionsList(status: boolean): Observable<IQuestionsResponse>{
+    return this.http.get<IQuestionsResponse>(this.resourceUrl('api/questions/true'))
+  }
+
+  createQuestion(question: IQuestion): Observable<number>{
+    return this.http.post<number>(this.resourceUrl('api/questions'), question);
+  }
+
+  getSuggestedAnswers(id: number): Observable<string[]>{
+    return this.http.get<string[]>(this.resourceUrl('api/questions/' + id));
   }
 }

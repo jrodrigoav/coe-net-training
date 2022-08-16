@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
                       {
                           policy.WithHeaders("Authorization", "Accept", "Referer", "User-Agent", "Content-Type");
                           policy.WithOrigins("http://localhost:4200");
-                          policy.WithMethods("GET", "PUT", "POST");
+                          policy.WithMethods("GET", "PUT", "POST", "DELETE");
                       });
 });
 //Usar Automapper
@@ -33,6 +33,7 @@ builder.Services.AddCors();
 builder.Services.AddTransient<UnicornRewardsContextSeed>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IQuestionService, QuestionService>();
 builder.Services.AddSingleton<UserValidatorService>();
 
 var app = builder.Build();
@@ -42,7 +43,8 @@ var app = builder.Build();
 //    using (var scope = app.Services.CreateScope())
 //    {
 //        using var db = scope.ServiceProvider.GetService<UnicornRewardsAPIContext>();
-//        if (db is not null) {
+//        if (db is not null)
+//        {
 //            await db.Database.MigrateAsync();
 //        }
 //    }

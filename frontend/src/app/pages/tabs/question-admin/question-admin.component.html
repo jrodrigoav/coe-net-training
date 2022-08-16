@@ -1,0 +1,47 @@
+<p>question-admin works!</p>
+<div class="container">
+    <div class="btn btn-success btn-lg mb-3" routerLink="/question-create">Create Question</div>
+    <table class="table table-striped">
+        <thead>
+            <th>Id</th>
+            <th>Type</th>
+            <th>Label</th>
+            <th>Tab Related</th>
+            <th>Sugested Answers</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let question of questionsList">
+                <td>{{question.id}}</td>
+                <td>{{question.type}}</td>
+                <td>{{question.label}}</td>
+                <td>{{question.tabId}}</td>
+                <td>
+                    <button *ngIf="question.sugestedAnswers" class="btn btn-primary"
+                        (click)="getSuggestedAnsw(question.id)" type="button" data-bs-toggle="modal"
+                        data-bs-target="#answersModal">See Answers</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="answersModal" tabindex="-1" aria-labelledby="answersModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="answersModalLabel">Suggested Answers</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li *ngFor="let answer of answersList">{{answer}}</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>

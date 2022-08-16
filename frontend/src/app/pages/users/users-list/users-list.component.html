@@ -27,7 +27,8 @@
       <td><ngb-highlight [result]="user.userName" [term]="searchedName"></ngb-highlight></td>
       <td><ngb-highlight [result]="user.email" [term]="searchedName"></ngb-highlight></td>
       <td><ngb-highlight [result]="user.webSite" [term]="searchedName"></ngb-highlight></td>
-      <td><button class="btn btn-success" routerLink="/user-update/{{ user.id }}">Update</button></td>
+      <!-- <td><button class="btn btn-success" routerLink="/user-update/{{ user.id }}">Update</button></td> -->
+      <td><button class="btn btn-warning" routerLink="/user-update/{{ user.id }}">Update</button></td>
     </tr>
     </tbody>
   </table>

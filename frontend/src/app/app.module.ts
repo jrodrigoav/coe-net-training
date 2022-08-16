@@ -21,13 +21,19 @@ import { UsersComponent } from './pages/users/users.component';
 import { UnicornRewardsApiService } from './services/unicorn-rewards-api.service';
 import { TestUnicornApiComponent } from './pages/test-unicorn-api/test-unicorn-api.component';
 import { ContactListComponent } from './pages/contact-list/contact-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { FileImportComponent } from './pages/users/file-import/file-import.component';
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
 import { UserUpdateComponent } from './pages/users/user-update/user-update.component';
 import { UserCreateComponent } from './pages/users/user-create/user-create.component';
+import { TabsHomeComponent } from './pages/tabs/tabs-home/tabs-home.component';
+import { TabAdminComponent } from './pages/tabs/tab-admin/tab-admin.component';
+import { TabUpdateComponent } from './pages/tabs/tab-update/tab-update.component';
+import { TabCreateComponent } from './pages/tabs/tab-create/tab-create.component';
+import { QuestionAdminComponent } from './pages/tabs/question-admin/question-admin.component';
+import { QuestionCreateComponent } from './pages/tabs/question-create/question-create.component';
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1; // Remove this line to use Angular Universal
 
@@ -88,6 +94,12 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     UserFormComponent,
     UserUpdateComponent,
     UserCreateComponent,
+    TabsHomeComponent,
+    TabAdminComponent,
+    TabUpdateComponent,
+    TabCreateComponent,
+    QuestionAdminComponent,
+    QuestionCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,7 +107,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AppRoutingModule,
     MsalModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [TypicodeService, UnicornRewardsApiService, { provide: ENV_CONFIG, useValue: environment },
     {

@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from 'src/app/interfaces/iuser';
-import { IUserSearched } from 'src/app/interfaces/iuser-list';
 import { UnicornRewardsApiService } from 'src/app/services/unicorn-rewards-api.service';
+import { customNoSpecialCharactersValidator, customStartWithLetterValidator } from 'src/app/validators/user-validators';
 
 @Component({
   selector: 'app-user-update',
@@ -12,6 +13,14 @@ import { UnicornRewardsApiService } from 'src/app/services/unicorn-rewards-api.s
 export class UserUpdateComponent implements OnInit {
   paramId: number = 0;
   selectedUser!: IUser;
+
+  editUser= new FormGroup({
+    name: new FormControl(''),
+    userName: new FormControl(''),
+    email: new FormControl(''),
+    webSite: new FormControl('')
+  })
+
   constructor(private router: Router, private route: ActivatedRoute, private _unicornRewardService: UnicornRewardsApiService) { }
 
   ngOnInit(): void {
@@ -19,13 +28,22 @@ export class UserUpdateComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       if (params.has('id')) {
         this.paramId = Number(params.get('id'));
-        this._unicornRewardService.getUserById(this.paramId).subscribe(
-          (response) => {
-            this.selectedUser = response;
-            console.log(this.selectedUser);
-            // this.emitUser(this.selectedUser);
-          }
-        )
+        // this._unicornRewardService.getUserById(this.paramId).subscribe(
+        //   (response) => {
+        //     this.selectedUser = response;
+        //     console.log(this.selectedUser);
+        //   }
+        // )
+        this._unicornRewardService.getUserById(this.paramId).subscribe((result) => {
+          // console.log(result);
+          this.editUser= new FormGroup({
+            name: new FormControl(result['name'], [Validators.required, Validators.maxLength(300)]),
+            userName: new FormControl(result['userName'], [Validators.required, customStartWithLetterValidator, customNoSpecialCharactersValidator]),
+            email: new FormControl(result['email'], [Validators.email, Validators.required]),
+            webSite: new FormControl(result['webSite'])
+          })
+        
+        })
       }
     });
   }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { concat } from 'rxjs';
-import { IScvResponse } from 'src/app/interfaces/iscvResponse';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { IUser } from 'src/app/interfaces/iuser';
 import { TypicodeService } from 'src/app/services/typicode.service';
 import { UnicornRewardsApiService } from 'src/app/services/unicorn-rewards-api.service';
@@ -11,37 +10,31 @@ import { UnicornRewardsApiService } from 'src/app/services/unicorn-rewards-api.s
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
+  
   listUsers: IUser[] = [];
   listSelectedUsers: IUser[] = [];
   constructor(private typicodeService: TypicodeService, private _unicornRewardService: UnicornRewardsApiService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem("usuarios") === null) {
-      this.save_localstorage();
-    }
 
-    this.load_localstorage();
-
-    this.typicodeService.getAllUsers().subscribe(r => this.listUsers = r);
-
-    //this.svcResult.total_rows_parsed = 0;
+    this.loadUsersFromService().subscribe(
+      r => this.listUsers = r,
+      error => { console.log(error) },
+      () => {
+        if (localStorage.getItem("UserListSelected") === null) this.saveSelectedUsers(this.listUsers.slice(0, 2));
+        this.load_localstorage();
+      }
+    );
+    
   }
 
-  save_localstorage(){
-    let usuarios = [
-      { "id": 11, "name": "Edson Ibañez", "username": "eibanez" , "email": "Sincere@april.biz", "website": "test.com" }, 
-      { "id": 12, "name": "Adriana Monrroy", "username": "amonrroy" , "email": "Sincere@april.biz", "website": "test.com" }, 
-      { "id": 13, "name": "Oscar Andrade", "username": "oandrade" , "email": "Sincere@april.biz", "website": "test.com" }, 
-      { "id": 14, "name": "Lorena Herrera", "username": "lherrera" , "email": "Sincere@april.biz", "website": "test.com" }, 
-    ];
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  loadUsersFromService(): Observable<IUser[]> {
+    return this.typicodeService.getAllUsers();
   }
 
   load_localstorage() {
-    var usuarios = localStorage.getItem("usuarios");
-    if(usuarios != null) {
-      this.listSelectedUsers = JSON.parse(usuarios);
-    }
+
+    this.listSelectedUsers = this.loadSelectedUsers("UserListSelected");
   }
 
   putEvent(name: string){
@@ -54,15 +47,21 @@ export class ContactListComponent implements OnInit {
   }
 
   moveRightList() {
+    
     const listauxusu = this.listUsers.filter(opt => opt.checked);
     const listauxsel = this.listSelectedUsers;
     for(let user of listauxusu){
       user.checked = false;
+
+      //check if the item already exist on the right side, if exist do not add the item.
+      if (this.existOnSelectedUsers(user.name)) continue;
+
       this.listUsers.splice(this.listUsers.indexOf(user), 1);
       this.putEvent(user.name);
       listauxsel.push(user);
     }
     this.listSelectedUsers = listauxsel;
+    this.saveSelectedUsers(this.listSelectedUsers);
   }
 
   moveLeftList() {
@@ -71,9 +70,15 @@ export class ContactListComponent implements OnInit {
     for(let userSel of listauxsel){
       userSel.checked = false;
       this.listSelectedUsers.splice(this.listSelectedUsers.indexOf(userSel), 1);
+
+      //check if the item already exist on the left side, if exist do not add the item.
+      if (this.existOnListUsers(userSel.name)) continue;
+
       listauxusu.push(userSel);
     }
+
     this.listUsers = listauxusu;
+    this.saveSelectedUsers(this.listSelectedUsers);
   }
 
   moveAllRightList(){
@@ -81,10 +86,15 @@ export class ContactListComponent implements OnInit {
     const listauxsel = this.listSelectedUsers;
     for(let user of listauxusu){
       user.checked = false;
+
+      //check if the item already exist on the right side, if exist do not add the item.
+      if (this.existOnSelectedUsers(user.name)) continue;
+
       listauxsel.push(user);
     }
     this.listUsers.splice(0, this.listUsers.length);
     this.listSelectedUsers = listauxsel;
+    this.saveSelectedUsers(this.listSelectedUsers);
   }
 
   moveAllLeftList(){
@@ -92,10 +102,34 @@ export class ContactListComponent implements OnInit {
     const listauxsel = this.listSelectedUsers;
     for(let userSel of listauxsel){
       userSel.checked = false;
+
+      //check if the item already exist on the left side, if exist do not add the item.
+      if (this.existOnListUsers(userSel.name)) continue;
+
       listauxusu.push(userSel);
     }
     this.listSelectedUsers.splice(0, this.listSelectedUsers.length);
+    this.saveSelectedUsers(this.listSelectedUsers);
     this.listUsers = listauxusu;
   }
-}
 
+  saveSelectedUsers(listSelectedUsers: IUser[]) {
+    localStorage.setItem('UserListSelected', JSON.stringify(listSelectedUsers));
+    return;
+  }
+
+  loadSelectedUsers(item:string ): IUser[] {
+    let content = "[]";
+    content = (localStorage.getItem(item)) ?? "[]";
+    return JSON.parse(content);
+  }
+
+  existOnSelectedUsers(name: string) {
+    return  (this.listSelectedUsers.filter(item => item.name == name)[0]) ? true : false;
+  }
+
+  existOnListUsers(name: string): boolean {
+    return (this.listUsers.filter(item => item.name == name)[0]) ? true : false;
+  }
+
+}
