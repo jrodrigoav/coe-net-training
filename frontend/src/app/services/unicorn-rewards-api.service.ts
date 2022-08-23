@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ENV_CONFIG, IEnvironmentConfig } from '../interfaces/environment-config';
 
@@ -17,11 +18,15 @@ export class UnicornRewardsApiService {
   }
 
   test(message: string): Observable<any> {
-    const msg= encodeURIComponent(message ?? "Hello World");
+    const msg = encodeURIComponent(message ?? "Hello World");
     return this.http.get(this.resourceUrl(`api/test/auth/${msg}`));
   }
 
   putRegister(name: string): Observable<any> {
     return this.http.put<any>(this.resourceUrl(`api/contact/${name}`), name);
-}
+  }
+
+  addAlbums(albums: FormGroup): Observable<any> {
+    return this.http.post<any>(this.resourceUrl(`api/albums/`), albums.value);
+  }
 }

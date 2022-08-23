@@ -44,7 +44,7 @@ export class UsersEditComponent implements OnInit {
       this.typicodeService.updateUser(form.value).pipe().subscribe({
         complete: () => {
           alert("User updated successfully");
-          this.router.navigate(['/users']);
+          this.router.navigateByUrl('/users');
         },
         error: (e) => {
           alert("Error updating the user, sorry :(");

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IAlbum } from '../../interfaces/ialbum';
 import { TypicodeService } from '../../services/typicode.service';
 
@@ -9,9 +10,13 @@ import { TypicodeService } from '../../services/typicode.service';
 })
 export class AlbumsComponent implements OnInit {
   albums : IAlbum[]=[];
-  constructor(private typicodeService:TypicodeService) { }
+  constructor(private typicodeService:TypicodeService,private router: Router) { }
 
   ngOnInit(): void {
     this.typicodeService.getAllAlbums().subscribe((r: IAlbum[]) => this.albums = r);
+  }
+
+  uploadAlbum() {
+    this.router.navigateByUrl('/albums/upload');
   }
 }

@@ -1,0 +1,23 @@
+<div class="container">
+    <form [formGroup]="albumForm" (ngSubmit)="onSubmit(albumForm)" class="col form">
+        <div class="input-div">
+            <label class="form-label" >Choose a json file with the album(s).
+                <input type="file" [writeFile]="true" class="form-control form-control-sm" formControlName="file" />
+            </label>
+            <div *ngIf="albumForm.get('file')?.errors?.['required'] && albumForm.get('file')?.dirty"
+                class="error">
+                Please provide a valid json file.
+            </div>
+            <div *ngIf="albumForm.get('file')?.errors?.['minlength'] && albumForm.get('file')?.dirty"
+                class="error">
+                Please provide at least one file.
+            </div>
+            <div *ngIf="albumForm.get('file')?.errors?.['fileSize'] && albumForm.get('file')?.dirty"
+                class="error">
+                File size cannot be more than 10MB.
+            </div>
+        </div>
+        <a class="button btn-link" routerLink="/albums">Cancel</a>
+        <button class="button" type="submit" [disabled]="albumForm.invalid" >Upload</button> 
+    </form>
+</div>

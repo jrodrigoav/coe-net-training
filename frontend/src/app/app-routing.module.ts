@@ -4,6 +4,7 @@ import { MsalGuard } from '@azure/msal-angular';
 import { BrowserUtils } from '@azure/msal-browser';
 
 import { AlbumsComponent } from './pages/albums/albums.component';
+import { UploadAlbumsComponent } from './pages/albums/upload-albums/upload-albums.component';
 import { ContactListComponent } from './pages/contact-list/contact-list.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginFailedComponent } from './pages/login-failed/login-failed.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, },
   { path: 'login-failed', component: LoginFailedComponent },
   { path: 'albums', component: AlbumsComponent, canActivate: [MsalGuard] },
+  { path: 'albums/upload', component: UploadAlbumsComponent, canActivate: [MsalGuard] },
   { path: 'users', component: UsersComponent, canActivate: [MsalGuard]},
   { path: 'users/edit', component: UsersEditComponent, canActivate: [MsalGuard] },
   { path: 'contact', component: ContactListComponent, canActivate: [MsalGuard] },
