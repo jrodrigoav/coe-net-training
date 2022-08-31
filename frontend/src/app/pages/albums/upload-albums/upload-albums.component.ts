@@ -30,7 +30,7 @@ export class UploadAlbumsComponent implements OnInit {
       this.unicornRewardsApiService.addAlbums(form).pipe().subscribe({
         complete: () => {
           alert("Album(s) added successfully");
-          this.router.navigateByUrl('/users');
+          this.router.navigateByUrl('/albums');
         },
         error: (e) => {
           alert("Error adding album(s), sorry :(");

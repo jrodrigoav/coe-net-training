@@ -27,6 +27,10 @@ export class UnicornRewardsApiService {
   }
 
   addAlbums(albums: FormGroup): Observable<any> {
-    return this.http.post<any>(this.resourceUrl(`api/albums/`), albums.value);
+    return this.http.post<any>(this.resourceUrl(`api/albums`), albums.value.file[0], {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 }
