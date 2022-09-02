@@ -1,8 +1,8 @@
 export interface IUser {
     id: number,
     name: string,
-    username: string,
+    userName: string,
     email: string,
-    website: string,
+    webSite: string,
     checked: boolean
 }

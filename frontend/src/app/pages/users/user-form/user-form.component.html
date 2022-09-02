@@ -1,0 +1,45 @@
+<form
+(ngSubmit)="getSubmit(form.value, form.valid)"
+#form="ngForm"
+id="formAddUser"
+novalidate
+autocomplete="off">
+<div class="form-container">
+    <div class="row justify-content-md-center p-2">
+        <div class="col-1"><label for="name">Name:</label></div>
+        <div class="col-6">
+            <input id="name" name="name" type="text" class="form-control" required maxlength="300" #name="ngModel" ngModel />
+            <div class="error" *ngIf="name.errors?.['required'] && name.dirty">Name is required.</div>
+            <div class="error" *ngIf="name.errors?.['maxlength'] && name.dirty">Max length of Name is 300.</div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center p-2">
+        <div class="col-1"><label for="username">User Name:</label></div>
+        <div class="col-6">
+            <input id="username" name="username" type="text" class="form-control" pattern="^[A-Za-z0-9_-]*$" required #username="ngModel" ngModel />
+            <div class="error" *ngIf="username.errors?.['required'] && username.dirty">User Name is required.</div>
+            <div class="error" *ngIf="username.errors?.['pattern'] && username.dirty">User Name should not have special characters</div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center p-2">
+        <div class="col-1"><label for="username">Email:</label></div>
+        <div class="col-6">
+            <input id="email" name="email" type="text" class="form-control" required email #email="ngModel" ngModel />
+            <div class="error" *ngIf="email.errors?.['required'] && email.dirty">Email is required.</div>
+            <div class="error" *ngIf="email.errors?.['email'] && email.dirty">Not formatted email.</div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center p-2">
+        <div class="col-1"><label for="username">WebSite:</label></div>
+        <div class="col-6">
+            <input id="website" name="website" type="text" class="form-control" #website="ngModel" ngModel />
+        </div>
+    </div>
+</div>
+
+<div class="container bg-light">
+    <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Registrar</button>
+    </div>
+</div>
+</form>

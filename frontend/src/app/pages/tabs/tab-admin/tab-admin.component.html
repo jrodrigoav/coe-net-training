@@ -1,0 +1,25 @@
+<p>tab-admin works!</p>
+
+<div class="container">
+    <div>
+        <button class="btn btn-success btn-lg mb-3" routerLink="/tab-create">Add New</button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Label</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tab of listTabs">
+                <td>{{tab.id}}</td>
+                <td>{{tab.name}}</td>
+                <td>{{tab.label}}</td>
+                <td><button class="btn btn-danger" (click)="deleteTab(tab.id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
