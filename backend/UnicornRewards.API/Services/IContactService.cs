@@ -1,7 +1,7 @@
 ﻿namespace UnicornRewards.API.Services
 {
-    public interface IContactService<T>
+    public interface IContactService
     {
-        Task<T> AddContactAsync(T id);
+        Task<string> AddContactAsync(string id);
     }
 }

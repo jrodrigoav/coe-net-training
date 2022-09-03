@@ -1,0 +1,31 @@
+<form (ngSubmit)="updateUser(form.value, form.valid)" [formGroup]="editUser" #form="ngForm">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" placeholder="Enter Name" formControlName="name">
+        <div class="error" *ngIf="editUser.get('name')?.hasError('required')">Name is required.</div>
+        <div class="error" *ngIf="editUser.get('name')?.hasError('maxlength')">Max length of Name is 300.</div>
+    </div>
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" placeholder="Enter Username" formControlName="userName">
+        <div class="error" *ngIf="editUser.get('userName')?.hasError('required')">Username is required.</div>
+        <div class="error" *ngIf="editUser.get('userName')?.hasError('customNoSpecialCharactersValidator')">User Name should not have special characters</div>
+        <div class="error" *ngIf="editUser.get('userName')?.hasError('customStartWithLetterValidator')">User Name should start with a letter</div>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" placeholder="Enter Email" formControlName="email">
+        <div class="error" *ngIf="editUser.get('email')?.hasError('required')">Email is required.</div>
+        <div class="error" *ngIf="editUser.get('email')?.hasError('email')">Not formatted email.</div>
+    </div>
+    <div class="form-group">
+        <label>Website</label>
+        <input type="text" class="form-control" placeholder="Enter WebSite" formControlName="webSite">
+    </div>
+
+    <div class="container bg-light">
+        <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Update</button>
+        </div>
+    </div>
+</form>

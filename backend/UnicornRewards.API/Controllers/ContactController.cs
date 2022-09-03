@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
+using System.Text.Json;
 using UnicornRewards.API.Services;
 
 namespace UnicornRewards.API.Controllers
@@ -8,9 +10,9 @@ namespace UnicornRewards.API.Controllers
     [ApiController, Route("api/contact")]
     public class ContactController : ControllerBase
     {
-        private readonly IContactService<string> _contactService;
+        private readonly IContactService _contactService;
 
-        public ContactController(IContactService<string> contactService)
+        public ContactController(IContactService contactService)
         {
             this._contactService = contactService;
         }

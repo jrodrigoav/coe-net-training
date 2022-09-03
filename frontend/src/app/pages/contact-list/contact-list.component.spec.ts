@@ -12,6 +12,7 @@ import { ContactListComponent } from './contact-list.component';
 describe('ContactListComponent', () => {
   let component: ContactListComponent;
   let fixture: ComponentFixture<ContactListComponent>;
+
   let subscriptions: Subscription[] = [];
 
   beforeAll(() => {
