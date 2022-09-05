@@ -75,8 +75,6 @@ export class UnicornRewardsApiService {
   getSuggestedAnswers(id: number): Observable<string[]>{
     return this.http.get<string[]>(this.resourceUrl('api/questions/' + id));
   }
-  }
-
   addAlbums(albums: FormGroup): Observable<any> {
     return this.http.post<any>(this.resourceUrl(`api/albums`), albums.value.file[0], {
       headers: {
@@ -85,3 +83,5 @@ export class UnicornRewardsApiService {
     });
   }
 }
+
+

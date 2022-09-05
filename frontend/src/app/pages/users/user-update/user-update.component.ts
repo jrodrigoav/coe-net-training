@@ -24,7 +24,7 @@ export class UserUpdateComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private _unicornRewardService: UnicornRewardsApiService) { }
 
   ngOnInit(): void {
-    this.selectedUser = { id: 0, name: "", userName: "", email: "", webSite: "", checked: false};
+    this.selectedUser = { id: 0, name: "", username: "", email: "", website: "", checked: false};
     this.route.paramMap.subscribe((params) => {
       if (params.has('id')) {
         this.paramId = Number(params.get('id'));
@@ -38,9 +38,9 @@ export class UserUpdateComponent implements OnInit {
           // console.log(result);
           this.editUser= new FormGroup({
             name: new FormControl(result['name'], [Validators.required, Validators.maxLength(300)]),
-            userName: new FormControl(result['userName'], [Validators.required, customStartWithLetterValidator, customNoSpecialCharactersValidator]),
+            userName: new FormControl(result['username'], [Validators.required, customStartWithLetterValidator, customNoSpecialCharactersValidator]),
             email: new FormControl(result['email'], [Validators.email, Validators.required]),
-            webSite: new FormControl(result['webSite'])
+            webSite: new FormControl(result['website'])
           })
         
         })

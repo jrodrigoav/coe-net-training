@@ -25,7 +25,6 @@ import { UsersComponent } from './pages/users/users.component';
 import { UnicornRewardsApiService } from './services/unicorn-rewards-api.service';
 import { TestUnicornApiComponent } from './pages/test-unicorn-api/test-unicorn-api.component';
 import { ContactListComponent } from './pages/contact-list/contact-list.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { FileImportComponent } from './pages/users/file-import/file-import.component';
@@ -116,7 +115,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalModule,
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
     RxReactiveFormsModule
   ],
   providers: [TypicodeService, UnicornRewardsApiService, { provide: ENV_CONFIG, useValue: environment },

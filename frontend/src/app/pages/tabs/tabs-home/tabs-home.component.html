@@ -22,9 +22,9 @@
                         <p class="question">{{question.label}}</p>
 
                         <input type="text" class="form-control mb-3" *ngSwitchCase="'text'"
-                            [formControlName]="question.id">
+                            [formControlName]="question.type">
 
-                        <select *ngSwitchCase="'select'" class="form-select mb-3" [formControlName]="question.id">
+                        <select *ngSwitchCase="'select'" class="form-select mb-3" [formControlName]="question.type">
                             <option selected [ngValue]="null">Select an answer</option>
                             <option [ngValue]="option" *ngFor="let option of listOptions">{{option}}</option>
                         </select>
