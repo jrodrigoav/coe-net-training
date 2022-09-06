@@ -21,7 +21,7 @@ export class UserUpdateComponent implements OnInit {
     webSite: new FormControl('')
   })
 
-  constructor(private router: Router, private route: ActivatedRoute, private _unicornRewardService: UnicornRewardsApiService) { }
+  constructor( private route: ActivatedRoute, private _unicornRewardService: UnicornRewardsApiService) { }
 
   ngOnInit(): void {
     this.selectedUser = { id: 0, name: "", username: "", email: "", website: "", checked: false};

@@ -6,6 +6,12 @@ import { TypicodeService } from '../../services/typicode.service';
 import { UsersComponent } from './users.component';
 import { of } from 'rxjs';
 import { delay } from "rxjs/operators";
+import { MsalGuard } from '@azure/msal-angular';
+import { RouterModule, Routes } from '@angular/router';
+import { UsersEditComponent } from './users-edit/users-edit.component';
+const routes: Routes = [
+  { path: 'users/edit', component: UsersEditComponent, canActivate: [MsalGuard] },
+];
 describe('UsersComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
@@ -13,7 +19,8 @@ describe('UsersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UsersComponent],
-      imports: [HttpClientModule],
+      imports: [HttpClientModule,HttpClientModule,
+        RouterModule.forRoot(routes )],
       providers: [TypicodeService, { provide: ENV_CONFIG, useValue: environment }]
     })
       .compileComponents();

@@ -112,7 +112,7 @@ describe('ContactListComponent', () => {
           next => { },
           error => { },
           () => {
-            expect(component.existOnSelectedUsers("Leanne Graham")).toBeTrue();
+            expect(component.existOnSelectedUsers("Leanne Graham")).toBe(true);
             done();
           }
         );

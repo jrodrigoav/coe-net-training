@@ -25,18 +25,18 @@ export class UsersEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const tempVar = history.state.userSeleced;
+    const tempVar = history.state?.userSeleced;
     if (tempVar == undefined) {
       this.router.navigate(['/users']);
     }
     this.userData = tempVar;
     this.userForm.patchValue({
-      id: this.userData.id,
-      name: this.userData.name,
-      username: this.userData.username,
-      email: this.userData.email,
-      website: this.userData.website,
-      checked: this.userData.checked ? this.userData.checked : false,
+      id: this.userData?.id,
+      name: this.userData?.name,
+      username: this.userData?.username,
+      email: this.userData?.email,
+      website: this.userData?.website,
+      checked: this.userData?.checked ? this.userData?.checked : false,
     })
   }
   onSubmit(form: FormGroup) {

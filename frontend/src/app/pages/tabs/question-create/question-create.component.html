@@ -1,5 +1,5 @@
 <p>question-create works!</p>
-<form (ngSubmit)="createQuestion(form.value, form.valid)" #form="ngForm" [formGroup]="createQuestionForm">
+<form (ngSubmit)="createQuestion(form?.value, form?.valid)" [formGroup]="createQuestionForm">
     <div class="container">
         <div class="form-group">
             <label>Type</label>
@@ -27,7 +27,7 @@
             </select>
             <div *ngIf="createQuestionForm.get('tabId')?.hasError('required')">Tab Id is required</div>
         </div>
-        <p>{{form.value | json}}</p>
-        <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Create</button>
+        <p>{{form?.value | json}}</p>
+        <button type="submit" [disabled]="form?.invalid" class="btn btn-primary">Create</button>
     </div>
 </form>
