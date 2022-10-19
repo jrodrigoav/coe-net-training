@@ -1,1 +1,30 @@
-<button type="button" (click)="testAuth()" class="btn btn-primary">Click to test auth</button>
+<h1>Test Auth</h1>
+<hr class="mb-3">
+
+<div class="w-50">
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label">Message:</label>
+            <input [formControl]="inputCtrl" class="form-control">
+            <div class="form-text">
+                The text message entered should be returned by API in JSON format.
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <button type="button" (click)="testAuth()" class="btn btn-primary">Test Auth</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row mb-3">
+        <div class="col">
+            <p>Response: </p>
+            <div>
+                {{ response | json }}
+            </div>
+        </div>
+    </div>
+</div>
