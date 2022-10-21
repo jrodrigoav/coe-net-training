@@ -31,6 +31,7 @@ builder.Services.AddHttpClient<ITypicodeService, TypicodeService>((client) =>
 });
 
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<IAlbumServices, AlbumServices>();
 
 
 var app = builder.Build();
