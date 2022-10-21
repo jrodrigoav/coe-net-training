@@ -1,6 +1,7 @@
 using Microsoft.Identity.Web;
 using Serilog;
 using UnicornRewards.API.Infraestructure;
+using UnicornRewards.API.Services;
 
 const string AllowLocalhostCORSPolicy = "AllowLocalhostCORSPolicy";
 
@@ -28,6 +29,9 @@ builder.Services.AddHttpClient<ITypicodeService, TypicodeService>((client) =>
     client.BaseAddress = new Uri(builder.Configuration["TypicodeService:Url"]);
     client.Timeout = TimeSpan.FromSeconds(5);
 });
+
+builder.Services.AddScoped<IUserServices, UserServices>();
+
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
