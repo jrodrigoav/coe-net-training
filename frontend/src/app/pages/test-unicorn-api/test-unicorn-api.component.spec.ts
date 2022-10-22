@@ -1,4 +1,5 @@
-import { DebugElement } from '@angular/core';
+import { DebugElement, } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
@@ -19,10 +20,15 @@ describe('TestUnicornApiComponent', () => {
     unicornApiServiceSpy.test.and.returnValue(of({ Message: "TEST" }));
 
     await TestBed.configureTestingModule({
-      declarations: [TestUnicornApiComponent],
+      imports: [
+        ReactiveFormsModule
+      ],
+      declarations: [
+        TestUnicornApiComponent
+      ],
       providers: [
         { provide: UnicornRewardsApiService, useValue: unicornApiServiceSpy },
-      ]
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestUnicornApiComponent);

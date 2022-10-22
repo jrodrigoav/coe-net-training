@@ -1,0 +1,19 @@
+<nav class="d-flex justify-content-between align-items-baseline">
+    <span>
+        Showing page {{ _page }} of {{ pageCount }}.
+    </span>
+    <ul class="pagination mb-0">
+        <li class="page-item" [class.disabled]="!hasPrevPage">
+            <button class="page-link" (click)="pageChangeClick(firstPage)">&laquo;</button>
+        </li>
+        <li class="page-item" [class.disabled]="!hasPrevPage">
+            <button class="page-link" (click)=" pageChangeClick(_page - 1)">&lsaquo;</button>
+        </li>
+        <li class="page-item" [class.disabled]="!hasNextPage">
+            <button class="page-link" (click)="pageChangeClick(_page + 1)"> &rsaquo; </button>
+        </li>
+        <li class="page-item" [class.disabled]="!hasNextPage">
+            <button class="page-link" (click)="pageChangeClick(lastPage)">&raquo;</button>
+        </li>
+    </ul>
+</nav>

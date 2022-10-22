@@ -1,7 +1,10 @@
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
+import { PaginatorComponent } from 'src/app/components/paginator/paginator.component';
 import { IUser } from 'src/app/interfaces/iuser';
-import { TypicodeService } from 'src/app/services/typicode.service';
+import { ApiService } from 'src/app/services/api.service';
 import { UsersComponent } from './users.component';
 
 const MOCK_USERS: Partial<IUser>[] = [
@@ -13,24 +16,31 @@ const MOCK_USERS: Partial<IUser>[] = [
 describe('UsersComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
-  let typicodeServiceSpy: any;
+  let el: DebugElement;
+  let apiServiceSpy: any;
 
   beforeEach(async () => {
 
-    typicodeServiceSpy = jasmine.createSpyObj<TypicodeService>('TypicodeService', ['getAllUsers'])
-    typicodeServiceSpy.getAllUsers.and.returnValue(of(MOCK_USERS));
+    apiServiceSpy = jasmine.createSpyObj('ApiService', ['getAllUsers'])
+    apiServiceSpy.getAllUsers.and.returnValue(of(MOCK_USERS));
 
     await TestBed.configureTestingModule({
       declarations: [
-        UsersComponent
+        UsersComponent,
+        PaginatorComponent,
       ],
       providers: [
-        { provide: TypicodeService, useValue: typicodeServiceSpy },
+        { provide: ApiService, useValue: apiServiceSpy },
       ]
-    }).compileComponents();
+    }).overrideComponent(
+      PaginatorComponent,
+      {}
+    ).compileComponents();
 
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
+    el = fixture.debugElement;
+
     fixture.detectChanges();
   });
 
@@ -39,7 +49,22 @@ describe('UsersComponent', () => {
   });
 
   it('should call getAllUsers on init', () => {
-    expect(typicodeServiceSpy.getAllUsers.calls.count()).toBe(1);
+    expect(apiServiceSpy.getAllUsers.calls.count()).toBe(1);
+  });
+
+  it('should display users table', () => {
+    const rows = el.queryAll(By.css('tbody tr'));
+
+    expect(rows.length).toBe(MOCK_USERS.length);
+
+    rows.forEach((row, idx) => {
+      const cells = row.queryAll(By.css('td'));
+
+      expect(cells[0].nativeElement.textContent).toBe(MOCK_USERS[idx].id?.toString());
+      expect(cells[1].nativeElement.textContent).toBe(MOCK_USERS[idx].name?.toString());
+      expect(cells[2].nativeElement.textContent).toBe(MOCK_USERS[idx].username?.toString());
+
+    });
   });
 
 });
