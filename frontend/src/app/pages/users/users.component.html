@@ -1,9 +1,26 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <ul *ngFor="let u of users">
-                <li>{{u.name}}</li>
-            </ul>
-        </div>
-    </div>
+<h1>Users</h1>
+<hr class="title-division">
+
+<div>
+    <table class="table table-responsive table-hover border">
+        <thead>
+            <tr table-primary>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let u of users">
+                <td>{{u.id || "-"}}</td>
+                <td>{{u.name || "-"}}</td>
+                <td>{{u.username || "-"}}</td>
+                <td>{{u.email || "-"}}</td>
+                <td>{{u.phone || "-"}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <app-paginator [page]="page" [dataCount]="users.length" (pageChange)="paginateData($event)"> </app-paginator>
 </div>
