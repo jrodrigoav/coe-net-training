@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+hr.title-division {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}

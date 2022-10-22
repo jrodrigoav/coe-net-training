@@ -1,9 +1,22 @@
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <ul *ngFor="let a of albums">
-                <li>{{a.title}}</li>
-            </ul>
-        </div>
-    </div>
+<h1>Albums</h1>
+<hr class="title-division">
+
+<div class="table-wrapper">
+    <table class="table table-responsive table-hover border">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let album of paginatedData">
+                <td>{{album.id}}</td>
+                <td>{{album.title}}</td>
+                <td>{{album.user?.id}} - {{album.user?.username}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <app-paginator [page]="page" [dataCount]="albums.length" (pageChange)="onPageChange($event)"> </app-paginator>
 </div>
