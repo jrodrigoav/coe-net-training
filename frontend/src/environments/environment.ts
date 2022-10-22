@@ -4,13 +4,14 @@
 
 export const environment = {
   production: false,
+  apiURL: "https://localhost:7284/api",
   typicodeUrl: "https://jsonplaceholder.typicode.com/",
   unicornRewardsApiUrl: "https://localhost:7284/",
-  msalAuth:{
-      clientId: "07eea724-3d99-4d9e-8cf2-c6b853c15e06",
-      authority: "https://login.microsoftonline.com/eedd1340-df1a-4db2-8a03-b4cfb1fa3e9d",
-      redirectUri: '/',
-      postLogoutRedirectUri: '/'
+  msalAuth: {
+    clientId: "07eea724-3d99-4d9e-8cf2-c6b853c15e06",
+    authority: "https://login.microsoftonline.com/eedd1340-df1a-4db2-8a03-b4cfb1fa3e9d",
+    redirectUri: '/',
+    postLogoutRedirectUri: '/'
   }
 };
 
