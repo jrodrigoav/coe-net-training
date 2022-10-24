@@ -16,7 +16,7 @@ namespace UnicornRewards.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Task<IEnumerable<AlbumDTO>>>> ListAllAsync()
+        public async Task<IActionResult> ListAllAsync()
         {
             var albums = await _albumService.ListAll();
             return Ok(albums);
