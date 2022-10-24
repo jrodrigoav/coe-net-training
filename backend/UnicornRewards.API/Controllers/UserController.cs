@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UnicornRewards.API.Models;
-using UnicornRewards.API.Infraestructure;
 using UnicornRewards.API.Services;
 
 namespace UnicornRewards.API.Controllers;
 
 [ApiController]
 [Route("api/user")]
-// [Authorize]
+[Authorize]
 public class UserController : ControllerBase
 {
     readonly IUserServices _userServices;
