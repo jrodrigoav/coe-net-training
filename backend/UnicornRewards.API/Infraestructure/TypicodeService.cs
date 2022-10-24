@@ -6,24 +6,41 @@ namespace UnicornRewards.API.Infraestructure;
 
 public class TypicodeService : ITypicodeService
 {
-    readonly HttpClient _httpClient;
+    const string usersCacheKey = "usersList";
 
-    public TypicodeService(HttpClient httpClient)
+    readonly HttpClient _httpClient;
+    readonly IMemoryCache _memoryCache;
+
+    public TypicodeService(HttpClient httpClient, IMemoryCache memoryCache)
     {
         _httpClient = httpClient;
+        _memoryCache = memoryCache;
     }
 
     public async Task<List<User>> GetAllUsers()
     {
         List<User> users = null!;
-        try
+
+        if (!_memoryCache.TryGetValue(usersCacheKey, out users))
         {
-            var resp = await this._httpClient.GetAsync("/users");
-            users = (await resp.Content.ReadFromJsonAsync<List<User>>())!;
-        }
-        catch (Exception ex)
-        {
-            throw new ServiceErrorResponseException("typicode/user", ex.Message);
+            try
+            {
+                var resp = await this._httpClient.GetAsync("/users");
+                users = (await resp.Content.ReadFromJsonAsync<List<User>>())!;
+            }
+            catch (Exception ex)
+            {
+                throw new ServiceErrorResponseException("typicode/user", ex.Message);
+            }
+
+            _memoryCache.Set<List<User>>(
+                usersCacheKey,
+                users,
+                new MemoryCacheEntryOptions()
+                    .SetSize(1)
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(15))
+                    .SetAbsoluteExpiration(TimeSpan.FromHours(1))
+            );
         }
 
         return users;
