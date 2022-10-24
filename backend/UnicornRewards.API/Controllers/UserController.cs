@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UnicornRewards.API.Models;
 using UnicornRewards.API.Services;
 
 namespace UnicornRewards.API.Controllers;
@@ -18,7 +17,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<User>>> GetAll()
+    public async Task<IActionResult> GetAll()
     {
         var users = await _userServices.ListAll();
         return Ok(users);
