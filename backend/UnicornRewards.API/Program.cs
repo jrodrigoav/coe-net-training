@@ -33,6 +33,10 @@ builder.Services.AddHttpClient<ITypicodeService, TypicodeService>((client) =>
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IAlbumServices, AlbumServices>();
 
+builder.Services.AddMemoryCache(config =>
+{
+    config.SizeLimit = 1024;
+});
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
