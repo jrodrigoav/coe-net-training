@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using UnicornRewards.API.Exceptions;
 using UnicornRewards.API.Models;
 
@@ -6,22 +7,30 @@ namespace UnicornRewards.API.Infraestructure;
 
 public class TypicodeService : ITypicodeService
 {
-    const string usersCacheKey = "usersList";
-
+    const string USERS_CACHE_KEY = "usersList";
+    
+    readonly IOptionsMonitor<TypicodeServiceOptions> _config;
     readonly HttpClient _httpClient;
     readonly IMemoryCache _memoryCache;
 
-    public TypicodeService(HttpClient httpClient, IMemoryCache memoryCache)
+
+    public TypicodeService(HttpClient httpClient,
+                           IMemoryCache memoryCache,
+                           IOptionsMonitor<TypicodeServiceOptions> config)
     {
         _httpClient = httpClient;
         _memoryCache = memoryCache;
+        _config = config;
+
+        _httpClient.BaseAddress = new Uri(config.CurrentValue.Url);
+        _httpClient.Timeout = TimeSpan.FromMilliseconds(config.CurrentValue.Timeout_ms);
     }
 
     public async Task<List<User>> GetAllUsers()
     {
         List<User> users = null!;
 
-        if (!_memoryCache.TryGetValue(usersCacheKey, out users))
+        if (!_memoryCache.TryGetValue(USERS_CACHE_KEY, out users))
         {
             try
             {
@@ -34,7 +43,7 @@ public class TypicodeService : ITypicodeService
             }
 
             _memoryCache.Set<List<User>>(
-                usersCacheKey,
+                USERS_CACHE_KEY,
                 users,
                 new MemoryCacheEntryOptions()
                     .SetSize(1)

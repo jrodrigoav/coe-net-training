@@ -6,7 +6,7 @@ namespace UnicornRewards.API.Controllers;
 
 [ApiController]
 [Route("api/albums")]
-[Authorize]
+// [Authorize]
 public class AlbumController : ControllerBase
 {
     readonly IAlbumServices _albumService;

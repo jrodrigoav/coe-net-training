@@ -24,11 +24,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration, "AzureAd");
 builder.Services.AddControllers();
 
-builder.Services.AddHttpClient<ITypicodeService, TypicodeService>((client) =>
-{
-    client.BaseAddress = new Uri(builder.Configuration["TypicodeService:Url"]);
-    client.Timeout = TimeSpan.FromSeconds(5);
-});
+
+builder.Services.Configure<TypicodeServiceOptions>(
+    builder.Configuration.GetSection(TypicodeServiceOptions.SECTION)
+);
+
+builder.Services.AddHttpClient<ITypicodeService, TypicodeService>();
 
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IAlbumServices, AlbumServices>();
