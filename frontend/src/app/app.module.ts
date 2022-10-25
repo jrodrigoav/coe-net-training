@@ -51,6 +51,8 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   // protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read']); // Prod environment. Uncomment to use.
   protectedResourceMap.set('https://graph.microsoft-ppe.com/v1.0/me', ['user.read']);
   protectedResourceMap.set('/api/test/auth', ['api://07eea724-3d99-4d9e-8cf2-c6b853c15e06/access_as_user']);
+  protectedResourceMap.set('/api/user', ['api://07eea724-3d99-4d9e-8cf2-c6b853c15e06/access_as_user']);
+  protectedResourceMap.set('/api/albums', ['api://07eea724-3d99-4d9e-8cf2-c6b853c15e06/access_as_user']);
 
   return {
     interactionType: InteractionType.Redirect,
