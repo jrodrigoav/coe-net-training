@@ -20,4 +20,6 @@ public class UserDTO
     public string Username { get; set; } = default!;
     public string Email { get; set; } = default!;
     public string Phone { get; set; } = default!;
+    public string CountryId { get; set; } = default!;
+    public CountryDTO Country { get; set; } = default!;
 }
