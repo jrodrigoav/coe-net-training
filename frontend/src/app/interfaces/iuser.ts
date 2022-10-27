@@ -1,3 +1,5 @@
+import { ICountry } from "./icountry"
+
 export interface IUser {
     id: number,
     name: string
@@ -5,4 +7,7 @@ export interface IUser {
     email: string,
     phone: string,
     website: string,
+
+    countryId: string,
+    country?: ICountry
 }
