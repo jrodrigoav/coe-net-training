@@ -1,4 +1,5 @@
 using Microsoft.Identity.Web;
+using OorsprongCountryInfoService;
 using Serilog;
 using UnicornRewards.API.Infraestructure;
 using UnicornRewards.API.Services;
@@ -30,9 +31,11 @@ builder.Services.Configure<TypicodeServiceOptions>(
 );
 
 builder.Services.AddHttpClient<ITypicodeService, TypicodeService>();
+builder.Services.AddScoped<ICountryServices, OorsprongCountryServices>();
 
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IAlbumServices, AlbumServices>();
+
 
 builder.Services.AddMemoryCache(config =>
 {
