@@ -10,6 +10,8 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Country</th>
+                <th>Flag</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +21,10 @@
                 <td>{{u.username || "-"}}</td>
                 <td>{{u.email || "-"}}</td>
                 <td>{{u.phone || "-"}}</td>
+                <td> {{u.countryId}} - {{ u.country?.name}} </td>
+                <td>
+                    <img [src]="u.country?.flag" height="30px">
+                </td>
             </tr>
         </tbody>
     </table>
