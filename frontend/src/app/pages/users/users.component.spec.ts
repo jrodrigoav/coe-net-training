@@ -1,23 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
+import { TypicodeService } from 'src/app/services/typicode.service';
 
-import { UsersComponent } from './users.component';
+
+export class MockLocalService {
+  getAllUsers() { return [ {id: 123, name: 'One', userName: 'test', email: 'Sincere@april.biz'}] 
+  }
+}
 
 describe('UsersComponent', () => {
-  let component: UsersComponent;
-  let fixture: ComponentFixture<UsersComponent>;
+  let mockService = new MockLocalService();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UsersComponent ]
+      providers: [{provide: TypicodeService, useValue: mockService}]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UsersComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should be return value', inject([TypicodeService], (typicodeService : TypicodeService) => {
+    return spyOn(mockService, "getAllUsers").and.returnValue([ {id: 123, name: 'One', userName: 'test2', email: 'test@april.biz'}] );
+  }));
+
 });

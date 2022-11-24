@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ENV_CONFIG, IEnvironmentConfig } from '../interfaces/environment-config';
+import { UsersAlbums } from '../interfaces/iusers-albums';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,10 @@ export class UnicornRewardsApiService {
   test(message: string): Observable<any> {
     const msg= encodeURIComponent(message ?? "Hello World");
     return this.http.get(this.resourceUrl(`api/test/auth/${msg}`));
+  }
+
+  getUsersAlbums(message: string): Observable<UsersAlbums> {
+    const msg= encodeURIComponent(message ?? "Hello World");
+    return this.http.get<UsersAlbums>(this.resourceUrl(`api/userAlbum/getAllAlbums/${msg}`));
   }
 }

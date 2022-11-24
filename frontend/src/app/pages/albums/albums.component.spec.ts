@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
+import { TypicodeService } from 'src/app/services/typicode.service';
 
-import { AlbumsComponent } from './albums.component';
+export class MockLocalService {
+  getAllAlbums() { return [{id: 123, userId: 1, title: 'test'}] 
+  }
+}
 
 describe('AlbumsComponent', () => {
-  let component: AlbumsComponent;
-  let fixture: ComponentFixture<AlbumsComponent>;
+  let mockService = new MockLocalService();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AlbumsComponent ]
+      providers: [{provide: TypicodeService, useValue: mockService}]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(AlbumsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should be return value', inject([TypicodeService], (typicodeService : TypicodeService) => {
+    return spyOn(mockService, "getAllAlbums").and.returnValue([{id: 123, userId: 1, title: 'test'}]);
+  }));
 });

@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <ng-container *ngIf="userAlbumsArray.length == 1; else data">
+                <div>No Hay registros para mostrar</div>
+            </ng-container>
+            <ng-template #data>
+                <ul *ngFor="let userAlbum of userAlbumsArray">
+                    <li><b>{{userAlbum.id}}</b> => <b>Name:</b> {{userAlbum.name}} --> <b>Email:</b> {{ userAlbum.email }}</li>
+                    <b style="margin-left: 40px;">Album Title:</b>
+                    <ul style="margin-left: 50px;" *ngFor="let title of userAlbum.albumName">
+                        <li>{{title}}</li>
+                    </ul>
+                </ul>
+            </ng-template>
+        </div>
+    </div>
+</div>
