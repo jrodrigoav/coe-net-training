@@ -2,8 +2,8 @@
 {
     public class UserAlbum
     {
-        public string username { get; set; }
-        public string email { get; set; }
-        public string title { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Title { get; set; }
     }
 }

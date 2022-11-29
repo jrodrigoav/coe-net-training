@@ -1,23 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using UnicornRewards.API.Services.Contracts;
 
 namespace UnicornRewards.API.Controllers
 {
     [ApiController]
-    [Route("[action]")]
+    [Route("api")]
     public class UserController : Controller
     {
-        [HttpGet]
-        public async Task<ActionResult> Users([FromRoute] string action)
+        private IUserService _userService;
+
+        public UserController(IUserService userService)
         {
-            HttpClient client = new HttpClient();
+            this._userService = userService;
+        }
 
-            client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com");
+        [HttpGet("users")]
+        public async Task<ActionResult> Users()
+        {
+            var response = await this._userService.GetAllUsers();
 
-            var response = await client.GetAsync(action);
+            var users = JsonSerializer.Serialize(response);
 
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-
-            return  Ok(jsonResponse);
+            return  Ok(users);
         }
     }
 }

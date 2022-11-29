@@ -26,7 +26,7 @@ namespace UnicornRewards.API.Controllers
             users = JsonSerializer.Deserialize<List<User>>(usersJsonResponse);
             albums = JsonSerializer.Deserialize<List<Album>>(albumsJsonResponse);
 
-            var userAlbums = users.Join(albums, u => u.id, a => a.userId, (a, b) => new { a.username, a.email, b.title });
+            var userAlbums = users.Join(albums, u => u.Id, a => a.UserId, (a, b) => new { a.Username, a.Email, b.Title });
 
             return  Ok(userAlbums);
         }

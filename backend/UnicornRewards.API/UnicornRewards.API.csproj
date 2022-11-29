@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UnicornRewards.API.Models\UnicornRewards.API.Models.csproj" />
+    <ProjectReference Include="..\UnicornRewards.API.Services\UnicornRewards.API.Services.csproj" />
   </ItemGroup>
 
 </Project>

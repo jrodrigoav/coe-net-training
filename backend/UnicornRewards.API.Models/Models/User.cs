@@ -1,36 +1,71 @@
-﻿namespace UnicornRewards.API.Models.Models
+﻿using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
+namespace UnicornRewards.API.Models.Models
 {
     public class User
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string username { get; set; }
-        public string email { get; set; }
-        public Address address { get; set; }
-        public string phone { get; set; }
-        public string website { get; set; }
-        public Company company { get; set; }
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("username")]
+        public string Username { get; set; }
+
+        [JsonPropertyName("email")]
+        public string Email { get; set; }
+
+        [JsonPropertyName("address")]
+        public Address Address { get; set; }
+
+        [JsonPropertyName("phone")]
+        public string Phone { get; set; }
+
+        [JsonPropertyName("website")]
+        public string Website { get; set; }
+
+        [JsonPropertyName("company")]
+        public Company Company { get; set; }
     }
 
     public class Address
     {
-        public string street { get; set; }
-        public string suite { get; set; }
-        public string city { get; set; }
-        public string zipcode { get; set; }
-        public Geo geo { get; set; }
+        [JsonPropertyName("street")]
+        public string Street { get; set; }
+
+        [JsonPropertyName("suite")]
+        public string Suite { get; set; }
+
+        [JsonPropertyName("city")]
+        public string City { get; set; }
+
+        [JsonPropertyName("zipcode")]
+        public string Zipcode { get; set; }
+
+        [JsonPropertyName("geo")]
+        public Geo Geo { get; set; }
     }
 
     public class Company
     {
-        public string name { get; set; }
-        public string catchPhrase { get; set; }
-        public string bs { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("catchPhrase")]
+        public string CatchPhrase { get; set; }
+
+        [JsonPropertyName("bs")]
+        public string Bs { get; set; }
     }
 
     public class Geo
     {
-        public string lat { get; set; }
-        public string lng { get; set; }
+        [JsonPropertyName("lat")]
+        public string Lat { get; set; }
+
+        [JsonPropertyName("lng")]
+        public string Lng { get; set; }
     }
 }
