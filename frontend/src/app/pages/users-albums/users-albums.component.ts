@@ -15,7 +15,7 @@ export class UsersAlbumsComponent implements OnInit {
   ngOnInit(): void {
     const msg = 'Test';
     this.unicornApiService.getUsersAlbums(msg).subscribe(x => {
-      if (x.id == 0 && x.name === null && x.albumName === null) {
+      if (x.id === undefined && x.name === undefined && x.albumName === undefined) {
         const userAlbum = { id: 0, name: "", albumName: ""};
         this.userAlbumsArray.push(userAlbum);
       } else {
