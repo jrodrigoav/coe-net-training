@@ -9,12 +9,14 @@ import { LoginFailedComponent } from './pages/login-failed/login-failed.componen
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { TestUnicornApiComponent } from './pages/test-unicorn-api/test-unicorn-api.component';
 import { UsersComponent } from './pages/users/users.component';
+import { UserAlbumsComponent } from './pages/user-albums/user-albums.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, },
   { path: 'login-failed', component: LoginFailedComponent },
   { path: 'users', component: UsersComponent, canActivate: [MsalGuard] },
   { path: 'albums', component: AlbumsComponent, canActivate: [MsalGuard] },
+  { path: 'useralbums', component: UserAlbumsComponent, canActivate: [MsalGuard] },
   { path: 'test', component: TestUnicornApiComponent, canActivate: [MsalGuard] },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },

@@ -11,4 +11,9 @@
     <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UnicornRewards.API.Models\UnicornRewards.API.Models.csproj" />
+    <ProjectReference Include="..\UnicornRewards.API.Services\UnicornRewards.API.Services.csproj" />
+  </ItemGroup>
+
 </Project>

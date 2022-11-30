@@ -18,6 +18,6 @@ export class UnicornRewardsApiService {
 
   test(message: string): Observable<any> {
     const msg= encodeURIComponent(message ?? "Hello World");
-    return this.http.get(this.resourceUrl(`api/test/auth/${msg}`));
+    return this.http.get(this.resourceUrl(`test/auth/${msg}`));
   }
 }

@@ -6,6 +6,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { IEnvironmentConfig, ENV_CONFIG } from '../interfaces/environment-config';
 import { IUser } from '../interfaces/iuser';
 import { IAlbum } from '../interfaces/ialbum';
+import { IUserAlbums } from '../interfaces/iuser-albums';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ import { IAlbum } from '../interfaces/ialbum';
 export class TypicodeService {
   private baseUrl: string;
   constructor(@Inject(ENV_CONFIG) private config: IEnvironmentConfig, private http: HttpClient) {
-    this.baseUrl = config.typicodeUrl.replace(/\/+$/, '');
+    this.baseUrl = config.unicornRewardsApiUrl.replace(/\/+$/, '');
   }
 
   private resourceUrl(resource: string) {
@@ -26,5 +27,9 @@ export class TypicodeService {
 
   getAllAlbums(): Observable<IAlbum[]> {
     return this.http.get<IAlbum[]>(this.resourceUrl('albums'));
+  }
+
+  getUserAlbums(): Observable<IUserAlbums[]> {
+    return this.http.get<IUserAlbums[]>(this.resourceUrl('useralbums'));
   }
 }
