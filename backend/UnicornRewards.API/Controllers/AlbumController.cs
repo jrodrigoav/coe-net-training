@@ -1,23 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UnicornRewards.API.Models.Models;
+using UnicornRewards.API.Services.Services;
 
 namespace UnicornRewards.API.Controllers
 {
     [ApiController]
-    [Route("[action]")]
+    [Route("api")]
     public class AlbumController : Controller
     {
-        [HttpGet]
-        public async Task<ActionResult> Albums([FromRoute] string action)
+        //private IAlbumService _albumService;
+
+        //public AlbumController(IAlbumService albumService)
+        //{
+        //    this._albumService = albumService;
+        //}
+
+        [HttpGet("albums")]
+        public async Task<ActionResult> Albums([FromServices] HttpClientService httpClient)
         {
-            HttpClient client = new HttpClient();
+            List<Album>? albums = await httpClient.GetAllAlbums();
 
-            client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com");
-
-            var response = await client.GetAsync(action);
-
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-
-            return  Ok(jsonResponse);
+            return  Ok(albums);
         }
     }
 }

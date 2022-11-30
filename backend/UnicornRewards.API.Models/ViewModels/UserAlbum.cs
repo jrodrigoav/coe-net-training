@@ -1,9 +1,14 @@
-﻿namespace UnicornRewards.API.Models.ViewModels
+﻿using System.Text.Json.Serialization;
+
+namespace UnicornRewards.API.Models.ViewModels
 {
     public class UserAlbum
     {
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Title { get; set; }
+        [JsonPropertyName("username")]
+        public string? UserName { get; set; }
+        [JsonPropertyName("email")]
+        public string? Email { get; set; }
+        [JsonPropertyName("title")]
+        public string? Title { get; set; }
     }
 }

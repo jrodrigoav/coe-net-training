@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using UnicornRewards.API.Services.Contracts;
+using UnicornRewards.API.Models.Models;
+using UnicornRewards.API.Services.Services;
 
 namespace UnicornRewards.API.Controllers
 {
@@ -8,19 +8,17 @@ namespace UnicornRewards.API.Controllers
     [Route("api")]
     public class UserController : Controller
     {
-        private IUserService _userService;
+        //private IUserService _userService;
 
-        public UserController(IUserService userService)
-        {
-            this._userService = userService;
-        }
+        //public UserController(IUserService userService)
+        //{
+        //    this._userService = userService;
+        //}
 
         [HttpGet("users")]
-        public async Task<ActionResult> Users()
+        public async Task<ActionResult> Users([FromServices] HttpClientService httpClient)
         {
-            var response = await this._userService.GetAllUsers();
-
-            var users = JsonSerializer.Serialize(response);
+            List<User>? users = await httpClient.GetAllUsers();
 
             return  Ok(users);
         }

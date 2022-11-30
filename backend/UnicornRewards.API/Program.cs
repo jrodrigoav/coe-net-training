@@ -1,6 +1,5 @@
 using Microsoft.Identity.Web;
 using Serilog;
-using UnicornRewards.API.Services.Contracts;
 using UnicornRewards.API.Services.Services;
 
 const string AllowLocalhostCORSPolicy = "AllowLocalhostCORSPolicy";
@@ -21,8 +20,11 @@ builder.Services.AddCors(options =>
 builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration, "AzureAd");
 builder.Services.AddControllers();
 
-builder.Services.AddSingleton<IBaseHttpClientService, BaseHttpClientService>();
-builder.Services.AddTransient<IUserService, UserService>();
+// Registered Services
+builder.Services.AddHttpClient<HttpClientService>();
+//builder.Services.AddTransient<IUserService, UserService>();
+//builder.Services.AddTransient<IAlbumService, AlbumService>();
+//builder.Services.AddTransient<IUserAlbumService, UserAlbumService>();
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
