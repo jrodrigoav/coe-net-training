@@ -1,5 +1,6 @@
 <div class="container">
     <div class="row">
+        <button (click)="downloadPdf()">Descargar PDF</button>
         <div class="col">
             <ng-container *ngIf="userAlbumsArray.length == 1; else data">
                 <div>No Hay registros para mostrar</div>

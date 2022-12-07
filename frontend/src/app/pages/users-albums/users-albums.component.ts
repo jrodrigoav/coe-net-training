@@ -25,4 +25,12 @@ export class UsersAlbumsComponent implements OnInit {
     })
   }
 
+  downloadPdf() {
+    console.log('DownloadPdf');
+    this.unicornApiService.getPdf().subscribe((result: any) => {
+      const fileUrl = URL.createObjectURL(result);
+      window.open(fileUrl);
+    })
+  }
+
 }
