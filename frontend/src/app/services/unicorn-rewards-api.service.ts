@@ -1,6 +1,6 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ENV_CONFIG, IEnvironmentConfig } from '../interfaces/environment-config';
 import { UsersAlbums } from '../interfaces/iusers-albums';
 
@@ -26,13 +26,4 @@ export class UnicornRewardsApiService {
     const msg= encodeURIComponent(message ?? "Hello World");
     return this.http.get<UsersAlbums>(this.resourceUrl(`api/userAlbum/getAllAlbums/${msg}`));
   }
-
-
-  getPdf(): any {
-    return this.http.get(this.resourceUrl(`api/userAlbum/getPdf`), { observe: 'response', responseType: 'blob' as 'json' })
-            .pipe(map((res) => {
-              return new Blob([res.body as BlobPart], { type: 'application/pdf'})
-            }))
-  }
-  
 }
