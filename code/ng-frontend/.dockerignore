@@ -1,0 +1,8 @@
+bin/
+obj/
+node_modules/
+.vscode/
+.angular/
+.gitignore
+package-lock.json
+README.md

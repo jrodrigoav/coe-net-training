@@ -481,3 +481,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Repository excludes
+package-lock.json

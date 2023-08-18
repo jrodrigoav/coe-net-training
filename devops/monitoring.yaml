@@ -1,0 +1,96 @@
+version: '3.8'
+
+networks:
+  monitoring-net:
+      driver: bridge
+volumes:
+  db:
+    driver: local
+
+services:
+  website:
+    build:
+      context: ../code/ng-frontend
+    container_name: website
+    ports:
+      - "80:80"
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: "localhost:24224"
+    networks:
+      - monitoring-net
+    depends_on:
+      - internalapi
+  internalapi:
+    build:
+      context: ../code/backend/InternalAPI
+    container_name: internalapi
+    ports:
+      - "7127:443"
+      - "81:80"
+    environment:
+       - ASPNETCORE_URLS=http://+:80;https://+:443
+       - ASPNETCORE_HTTPS_PORT=7127
+       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localcert.pfx
+       - ASPNETCORE_Kestrel__Certificates__Default__Password=securepassword
+    volumes:
+       - ./lokilogs:/https:ro
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: "localhost:24224"
+    networks:
+      - monitoring-net
+    depends_on:
+      - fluent-bit
+  fluent-bit:
+    image: fluent/fluent-bit:2.1.8
+    container_name: fluido
+    ports:
+      - "24224:24224"
+    volumes:
+      - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+    networks:
+      - monitoring-net
+    depends_on:
+      - db
+  grafana:
+    image: grafana/grafana:10.0.3
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - monitoring-net
+  db:
+    image: postgres:15.4-alpine3.18
+    restart: always
+    container_name: elefante
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_USER=fluido
+      - POSTGRES_DB=logs
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - monitoring-net
+  dbui:
+    image: dpage/pgadmin4:7.5
+    container_name: dbui
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_DEFAULT_EMAIL=jesus.acedo@unosquare.com
+    ports:
+       - "82:80"
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: "localhost:24224"
+    networks:
+      - monitoring-net
+    depends_on:
+      - fluent-bit
